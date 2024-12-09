@@ -1,7 +1,6 @@
 export default function ContactUs() {
     return (
       <div className="min-h-screen bg-gray-50 py-10">
-        {/* Header Section */}
         <div className="bg-indigo-50 py-10">
           <div className="max-w-6xl mx-auto px-4">
             <h1 className="text-4xl font-bold text-indigo-900 mb-2">Contact Us</h1>
@@ -11,9 +10,7 @@ export default function ContactUs() {
           </div>
         </div>
   
-        {/* Information Section */}
         <div className="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Section */}
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-indigo-900">Information About Us</h2>
             <p className="text-gray-600 leading-relaxed">
@@ -29,7 +26,6 @@ export default function ContactUs() {
             </div>
           </div>
   
-          {/* Right Section */}
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-indigo-900">Contact Way</h2>
             <div className="space-y-4">
@@ -57,9 +53,7 @@ export default function ContactUs() {
           </div>
         </div>
   
-        {/* Contact Form Section */}
         <div className="max-w-6xl mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Section - Form */}
           <div>
             <h2 className="text-2xl font-bold text-indigo-900">Get In Touch</h2>
             <p className="text-gray-600 mt-4 leading-relaxed">
@@ -68,7 +62,6 @@ export default function ContactUs() {
               bibendum quam.
             </p>
   
-            {/* Form */}
             <form className="mt-8 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input
@@ -97,10 +90,9 @@ export default function ContactUs() {
             </form>
           </div>
   
-          {/* Right Section - Image */}
           <div className="flex justify-center items-center">
             <img
-              src="/contact.png" // Replace this with your actual image path
+              src="/contact.png" 
               alt="Contact Us Illustration"
               className="w-full max-w-md rounded-full shadow-lg"
             />

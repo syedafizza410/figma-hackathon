@@ -1,22 +1,23 @@
+import Image from "next/image";
 import React from "react";
 
 const ShopexOffer = () => {
   const offers = [
     {
-      icon: "/free-delivery 1.png", // Replace with the actual image path
-      title: "24/7 Support",
+      icon: "/free-delivery 1.png", 
+      title: "Free Delivery",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.",
     },
     {
       icon: "/cashback 1.png",
-      title: "24/7 Support",
+      title: "Cashback Offer",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.",
     },
     {
       icon: "/premium-quality 1.png",
-      title: "24/7 Support",
+      title: "Premium Quality",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.",
     },
@@ -30,35 +31,34 @@ const ShopexOffer = () => {
 
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Title */}
-        <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">
           What Shopex Offer!
         </h2>
 
-        {/* Responsive Offer Cards */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-6 space-y-6 lg:space-y-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {offers.map((offer, index) => (
             <div
               key={index}
-              className="flex-1 min-h-[200px] bg-white shadow-lg rounded-lg p-6 text-center border border-gray-200"
+              className="flex flex-col items-center bg-white shadow-md rounded-lg p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300"
             >
-              {/* Icon */}
-              <div className="w-16 h-16 mx-auto mb-4">
-                <img
+              <div className="w-16 h-16 mb-4">
+                <Image
                   src={offer.icon}
                   alt={offer.title}
-                  className="object-contain"
+                  height={65}
+                  width={65}
+                  className="object-contain w-full h-full"
                 />
               </div>
 
-              {/* Title */}
-              <h3 className="text-blue-800 font-semibold text-lg mb-2">
+              <h3 className="text-blue-800 font-semibold text-base sm:text-lg md:text-xl mb-2">
                 {offer.title}
               </h3>
 
-              {/* Description */}
-              <p className="text-gray-500 text-sm">{offer.description}</p>
+              <p className="text-gray-500 text-sm md:text-base">
+                {offer.description}
+              </p>
             </div>
           ))}
         </div>

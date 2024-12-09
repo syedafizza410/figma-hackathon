@@ -3,8 +3,7 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-blue-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Newsletter */}
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Hekto</h2>
           <div className="flex flex-col space-y-4">
@@ -13,14 +12,15 @@ const Footer: React.FC = () => {
               placeholder="Enter Email Address"
               className="p-3 rounded-md border border-gray-300"
             />
-            <button className="bg-pink-500 text-white px-6 py-3 rounded-md font-semibold">Sign Up</button>
+            <button className="bg-pink-500 text-white px-6 py-3 rounded-md font-semibold">
+            <a href='/login'>Sign Up</a> 
+            </button>
           </div>
           <p className="text-sm text-gray-600 mt-4">
             Contact Info <br /> 17 Princess Road, London, Greater London NW1 8JR, UK
           </p>
         </div>
 
-        {/* Categories */}
         <div>
           <h2 className="text-lg font-bold text-gray-800 mb-4">Categories</h2>
           <ul className="space-y-2 text-gray-600">
@@ -32,11 +32,10 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Customer Care */}
         <div>
           <h2 className="text-lg font-bold text-gray-800 mb-4">Customer Care</h2>
           <ul className="space-y-2 text-gray-600">
-            <li>My Account</li>
+            <a href="/login">My Account</a>
             <li>Discount</li>
             <li>Returns</li>
             <li>Order History</li>
@@ -44,7 +43,6 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Pages */}
         <div>
           <h2 className="text-lg font-bold text-gray-800 mb-4">Pages</h2>
           <ul className="space-y-2 text-gray-600">

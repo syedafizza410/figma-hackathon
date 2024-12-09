@@ -11,7 +11,6 @@ const BlogPage = () => {
       </header>
 
       <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 p-6">
-        {/* Blog Section */}
         <section className="md:col-span-3">
           <article className="bg-white shadow rounded-lg overflow-hidden">
             <img src="/blog1.png" alt="Blog" className="w-full" />
@@ -40,7 +39,6 @@ const BlogPage = () => {
           </article>
         </section>
 
-        {/* Sidebar Section */}
         <aside className="space-y-6">
           <div>
             <input
@@ -115,7 +113,6 @@ const BlogPage = () => {
           </div>
           
         </aside>
-        {/* Blog Section */}
         <section className="md:col-span-3">
           <article className="bg-white shadow rounded-lg overflow-hidden">
             <img src="blog2.png" alt="Blog" className="w-full" />
@@ -181,7 +178,6 @@ const BlogPage = () => {
               </ul>
           </div>
 
-        {/* Blog Section */}
         <section className="md:col-span-3">
           <article className="bg-white shadow rounded-lg overflow-hidden">
             <img src="/blog3.png" alt="Blog" className="w-full" />

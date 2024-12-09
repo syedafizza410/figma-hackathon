@@ -1,10 +1,9 @@
 export default function CartPage() {
-    // Array of products with individual images and details
     const products = [
       {
         id: 1,
         name: "Brown Leather Bag",
-        image: "cart1.png", // Replace with your image URL
+        image: "cart1.png",
         color: "Brown",
         size: "XL",
         price: 32.0,
@@ -13,7 +12,7 @@ export default function CartPage() {
       {
         id: 2,
         name: "Black Handbag",
-        image: "cart2.png", // Replace with your image URL
+        image: "cart2.png", 
         color: "Black",
         size: "M",
         price: 45.0,
@@ -22,7 +21,7 @@ export default function CartPage() {
       {
         id: 3,
         name: "Red Crossbody Bag",
-        image: "cart3.png", // Replace with your image URL
+        image: "cart3.png", 
         color: "Red",
         size: "L",
         price: 25.0,
@@ -31,7 +30,7 @@ export default function CartPage() {
       {
         id: 4,
         name: "Gray Tote Bag",
-        image: "cart4.png", // Replace with your image URL
+        image: "cart4.png", 
         color: "Gray",
         size: "XL",
         price: 38.0,
@@ -40,7 +39,7 @@ export default function CartPage() {
       {
         id: 5,
         name: "Pink Mini Bag",
-        image: "cart5.png", // Replace with your image URL
+        image: "cart5.png", 
         color: "Pink",
         size: "S",
         price: 29.0,
@@ -50,7 +49,6 @@ export default function CartPage() {
   
     return (
       <div className="min-h-screen bg-gray-50 py-6">
-        {/* Header Section */}
         <div className="w-full bg-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4">
             <h1 className="text-3xl font-bold text-indigo-900">Shopping Cart</h1>
@@ -60,9 +58,7 @@ export default function CartPage() {
           </div>
         </div>
   
-        {/* Main Content */}
         <div className="max-w-6xl mx-auto px-4 mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Product Table */}
           <div className="lg:col-span-2">
             <table className="w-full border-collapse border border-gray-200 bg-white rounded-lg">
               <thead className="bg-gray-100">
@@ -125,9 +121,7 @@ export default function CartPage() {
             </div>
           </div>
   
-          {/* Sidebar */}
           <div className="space-y-8">
-            {/* Cart Totals */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-lg font-semibold text-gray-800">Cart Totals</h2>
               <div className="mt-4">
@@ -148,7 +142,6 @@ export default function CartPage() {
               </div>
             </div>
   
-            {/* Calculate Shipping */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-lg font-semibold text-gray-800">
                 Calculate Shipping

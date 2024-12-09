@@ -1,7 +1,6 @@
 export default function LoginPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center">
-        {/* Header Section */}
         <div className="w-full bg-gray-100 py-6">
           <div className="max-w-6xl mx-auto px-4">
             <h1 className="text-3xl font-bold text-indigo-900">My Account</h1>
@@ -11,7 +10,6 @@ export default function LoginPage() {
           </div>
         </div>
   
-        {/* Login Section */}
         <div className="flex-1 w-full flex items-center justify-center mt-6">
           <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
             <h1 className="text-2xl font-bold text-gray-900 text-center">Login</h1>

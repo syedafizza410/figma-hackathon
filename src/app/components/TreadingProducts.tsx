@@ -10,20 +10,19 @@ const TrendingProducts = () => {
   ];
 
   const executiveProducts = [
-    { name: "Executive Seat chair", price: "$19.00", image: "/img1.jpg" },
-    { name: "Executive Seat chair", price: "$32.00", image: "/img2.jpg" },
-    { name: "Executive Seat chair", price: "$49.00", image: "/img3.jpg" },
+    { name: "Executive Seat chair", price: "$19.00", image: "/img1.png" },
+    { name: "Executive Seat chair", price: "$32.00", image: "/img2.png" },
+    { name: "Executive Seat chair", price: "$49.00", image: "/img3.png" },
   ];
 
   return (
     <section className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-blue-800 text-center mb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-800 text-center mb-8">
           Trending Products
         </h2>
 
-        {/* Product Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product, index) => (
             <div
               key={index}
@@ -47,19 +46,19 @@ const TrendingProducts = () => {
           ))}
         </div>
 
-        {/* Pink and Blue Sections with Executive Products */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-          {/* Pink Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           <div className="bg-pink-100 p-6 rounded-lg flex flex-col justify-between">
             <div>
-              <h3 className="text-blue-800 font-semibold text-xl">
+              <h3 className="text-blue-800 font-semibold text-lg md:text-xl">
                 23% off in all products
               </h3>
-              <p className="text-pink-500 mt-2 text-sm cursor-pointer">Shop Now</p>
+              <p className="text-pink-500 mt-2 text-sm md:text-base cursor-pointer">
+                Shop Now
+              </p>
             </div>
             <div className="relative h-32 w-full mt-4">
               <Image
-                src="/image 1162.png" // Replace with your actual image path
+                src="/image 1162.png" 
                 alt="Clock"
                 layout="fill"
                 objectFit="contain"
@@ -67,17 +66,18 @@ const TrendingProducts = () => {
             </div>
           </div>
 
-          {/* Blue Section */}
-          <div className="bg-blue-100 p-6 rounded-lg flex flex-col justify-between h-72">
+          <div className="bg-blue-100 p-6 rounded-lg flex flex-col justify-between">
             <div>
-              <h3 className="text-blue-800 font-semibold text-xl">
+              <h3 className="text-blue-800 font-semibold text-lg md:text-xl">
                 23% off in all products
               </h3>
-              <p className="text-pink-500 mt-2 text-sm cursor-pointer">View Collection</p>
+              <p className="text-pink-500 mt-2 text-sm md:text-base cursor-pointer">
+                View Collection
+              </p>
             </div>
-            <div className="relative h-32 w-full">
+            <div className="relative h-32 w-full mt-4">
               <Image
-                src="/image 1161.png" // Replace with your actual image path
+                src="/image 1161.png" 
                 alt="Table"
                 layout="fill"
                 objectFit="contain"
@@ -85,12 +85,11 @@ const TrendingProducts = () => {
             </div>
           </div>
 
-          {/* Executive Seat Cards */}
           <div className="space-y-4">
             {executiveProducts.map((product, index) => (
               <div
                 key={index}
-                className="bg-white shadow-md rounded-md flex items-center p-2 border border-gray-200"
+                className="bg-white shadow-md rounded-md flex items-center p-4 border border-gray-200"
               >
                 <div className="relative w-16 h-16 mr-4">
                   <Image
@@ -102,10 +101,10 @@ const TrendingProducts = () => {
                   />
                 </div>
                 <div>
-                  <h4 className="text-blue-800 font-medium text-sm">
+                  <h4 className="text-blue-800 font-medium text-sm md:text-base">
                     {product.name}
                   </h4>
-                  <p className="text-gray-600 text-xs">{product.price}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">{product.price}</p>
                 </div>
               </div>
             ))}

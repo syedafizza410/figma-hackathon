@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Product = () => {
-  // Products Array
   const products = [
     {
       id: 1,
@@ -20,7 +19,7 @@ const Product = () => {
     {
       id: 3,
       title: 'Vitae suspendisse sed',
-      image: '/image1.png',
+      image: '/image 1173.png',
       price: 26.0,
       discountedPrice: 42.0,
     },
@@ -83,12 +82,10 @@ const Product = () => {
         price: 26.0,
         discountedPrice: 42.0,
       },
-    // Add more products here...
   ];
 
   return (
-    <div className="bg-gray-50">
-      {/* Grid Controls Section */}
+    <div className="bg-gray-100">
       <div className="bg-white py-6">
         <div className="bg-purple-50 py-11 px-11">
           <div className="max-w-6xl mx-auto px-4">
@@ -146,7 +143,6 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Product Grid Section */}
       <div className="py-10">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -155,7 +151,6 @@ const Product = () => {
                 key={product.id}
                 className="bg-gray-200 border border-gray-200 rounded-lg shadow-sm p-4 text-center"
               >
-                {/* Product Image */}
                 <div className="mb-4">
                   <img
                     src={product.image}
@@ -164,19 +159,16 @@ const Product = () => {
                   />
                 </div>
 
-                {/* Product Title */}
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {product.title}
                 </h3>
 
-                {/* Dots Section */}
                 <div className="flex justify-center items-center space-x-2 mb-2">
                   <span className="w-3 h-3 bg-orange-400 rounded-full"></span>
                   <span className="w-3 h-3 bg-purple-500 rounded-full"></span>
                   <span className="w-3 h-3 bg-pink-500 rounded-full"></span>
                 </div>
 
-                {/* Product Prices */}
                 <div className="text-sm">
                   <span className="text-indigo-600 font-bold mr-2">
                     ${product.price}
@@ -190,7 +182,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

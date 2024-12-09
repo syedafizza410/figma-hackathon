@@ -9,14 +9,14 @@ const LatestProducts: React.FC = () => {
       name: "Comfort Handy Craft",
       price: 42.0,
       originalPrice: 65.0,
-      sale: false, // No sale tag for the first product
-      image: "/image 1166.png", // Replace with actual image paths
+      sale: false,
+      image: "/image 1166.png",
     },
     {
       name: "Comfort Handy Craft",
       price: 42.0,
       originalPrice: 65.0,
-      sale: true, // Sale tag and hover icons for the second product
+      sale: true,
       image: "/image 15.png",
     },
     {
@@ -45,20 +45,18 @@ const LatestProducts: React.FC = () => {
       price: 42.0,
       originalPrice: 65.0,
       sale: false,
-      image: "/Component 4.png",
+      image: "/image 3.png",
     },
   ];
 
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Title */}
-        <h2 className="text-3xl font-bold text-blue-800 text-center mb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-800 text-center mb-6">
           Latest Products
         </h2>
 
-        {/* Categories */}
-        <div className="flex justify-center space-x-6 mb-10">
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {categories.map((category, index) => (
             <button
               key={index}
@@ -73,61 +71,60 @@ const LatestProducts: React.FC = () => {
           ))}
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-lg p-4 text-center group  ${
+              className={`relative bg-white rounded-lg p-4 text-center group ${
                 product.sale && index === 1 ? "sale-product" : ""
               }`}
             >
-              {/* Product Image */}
-              <div className="w-96 h-72 mb-4 overflow-hidden rounded-lg bg-gray-100">
-                <img
+              <div className="w-full h-60 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center">
+                <Image
                   src={product.image}
                   alt={product.name}
-                  width={250}
-                  height={100}
-                  className="ml-12 mt-7"
+                  width={360}
+                  height={306}
+                  className="object-contain h-full"
                 />
               </div>
 
-              {/* Sale Badge */}
               {product.sale && index === 1 && (
-                <div className="absolute top-4 left-4 text-white text-xs px-2 py-1 rounded">
-                <img src="/Vector 1.png"/>
-                <div className="absolute top-5 left-4 w-16 h-6 text-white text-xs font-semibold flex items-center justify-center transform -rotate-12">
-                Sale
-                </div>
+                <div className="absolute top-4 left-4">
+                  <Image src="/Group 27.png" alt="Sale Badge" width={65} height={65} />
+                  <div className="absolute top-5 left-4 w-16 h-6 text-white text-xs font-semibold flex items-center justify-center transform -rotate-12">
+                    Sale
+                  </div>
                 </div>
               )}
 
-              {/* Product Info */}
-              <div className="text-gray-500 flex items-start justify-start space-x-2">
-              <h3 className="text-blue-800 font-semibold">
-                {product.name}
-              </h3>
-              <h2 className="absolute text-blue-800 text-sm font-bold left-64">
-                  ${product.price.toFixed(2)}
-              </h2>
-                <h2 className="absolute text-red-500 text-sm line-through left-80">
-                  ${product.originalPrice.toFixed(2)}
-                </h2>
+              <div className="mt-4">
+                <h3 className="text-base md:text-lg font-semibold text-blue-800">
+                  {product.name}
+                </h3>
+                <div className="flex items-center justify-center space-x-2 mt-2">
+                  <span className="text-blue-800 text-sm md:text-base font-bold">
+                    ${product.price.toFixed(2)}
+                  </span>
+                  <span className="text-red-500 text-sm md:text-base line-through">
+                    ${product.originalPrice.toFixed(2)}
+                  </span>
+                </div>
               </div>
 
-              {/* Hover Icons */}
               {index === 1 && (
-                <div className="absolute top-44 lg:right-80 flex flex-col items-center space-y-2">
-                  <button className="bg-gray-200 p-2 rounded-full text-blue-700">
-                    <ShoppingCartIcon className="h-4 w-4" />
-                  </button>
-                  <button className="p-2 rounded-full text-blue-700">
-                    <HeartIcon className="h-4 w-4" />
-                  </button>
-                  <button className="p-2 rounded-full text-blue-700">
-                    <SearchIcon className="h-4 w-4" />
-                  </button>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div className="flex space-x-2">
+                    <button className="bg-gray-200 p-2 rounded-full text-blue-700">
+                      <ShoppingCartIcon className="h-5 w-5" />
+                    </button>
+                    <button className="bg-gray-200 p-2 rounded-full text-blue-700">
+                      <HeartIcon className="h-5 w-5" />
+                    </button>
+                    <button className="bg-gray-200 p-2 rounded-full text-blue-700">
+                      <SearchIcon className="h-5 w-5" />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

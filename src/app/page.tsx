@@ -13,7 +13,6 @@ import LatestBlog from "./components/Blog";
 export default function Home() {
   return (
     <div>
-      <Navbar />
       <main>
         <HeroSection />
         <FeaturedProducts />
