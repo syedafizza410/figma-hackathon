@@ -103,6 +103,7 @@ const Navbar = () => {
                 )}
               </div>
 
+              <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Pages</a>
               <a href="/ProductDetail" className="text-gray-900 hover:text-purple-600">Products</a>
               <a href="/Blog" className="text-gray-900 hover:text-purple-600">Blog</a>
               <a href="/Contact" className="text-gray-900 hover:text-purple-600">Contact</a>
@@ -160,6 +161,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Pages</a>
             <a href="/Product" className="block text-gray-900 hover:bg-gray-200 py-2">Products</a>
             <a href="/Blog" className="block text-gray-900 hover:bg-gray-200 py-2">Blog</a>
             <a href="/Contact" className="block text-gray-900 hover:bg-gray-200 py-2">Contact</a>
