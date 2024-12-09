@@ -4,9 +4,9 @@ import Image from "next/image";
 const UniqueFeatures = () => {
   return (
     <section className="bg-purple-50 py-12">
-      <div className="container mx-auto flex flex-col lg:flex-row lg:items-center gap-8 px-32 mr-44">
+      <div className="container mx-auto flex flex-col lg:flex-row lg:items-center gap-8 px-32">
         {/* Sofa Image */}
-        <div className="flex-1 relative order-1 lg:order-1 lg:ml-28">
+        <div className="flex-1 relative order-1 lg:order-1">
           <Image
             src="/Group 153.png" // Replace with the actual path of your sofa image
             alt="Sofa"

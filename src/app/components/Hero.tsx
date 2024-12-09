@@ -4,16 +4,9 @@ import Head from "next/head";
 
 const HeroSection = () => {
   return (
-    <>
-      <Head>
-        {/* Viewport meta tag ensures proper scaling on mobile devices */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
       
       <section className="bg-purple-50 relative py-12">
         <div className="container mx-auto px-6">
-          {/* Maintain the original flex-col by default */}
-          {/* On large screens, arrange items horizontally and centered */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between relative gap-8">
 
             {/* Lamp Section */}
@@ -21,7 +14,7 @@ const HeroSection = () => {
             {/* On lg: position statically for horizontal alignment */}
             <div className="flex justify-center lg:absolute justify-start lg:static">
               <Image
-                src="/lamp.png" // Update with your lamp image path
+                src="/lamp.png" 
                 alt="Lamp"
                 width={150}
                 height={150}
@@ -49,7 +42,7 @@ const HeroSection = () => {
 
             {/* Sofa Section */}
             {/* At lg, this flows to the right as we've used lg:flex-row and lg:justify-between */}
-            <div className="flex justify-center lg:justify-end mr-28 sm:mt-72 xs:mt-60 lg:static lg:m-0 lg:mr-32">
+            <div className="flex justify-center lg:justify-end sm:mt-32 xs:mt-60 lg:static lg:m-0">
               <Image
                 src="/sofa.png" // Update with your sofa image path
                 alt="Sofa"
@@ -68,7 +61,6 @@ const HeroSection = () => {
           </div>
         </div>
       </section>
-    </>
   );
 };
 

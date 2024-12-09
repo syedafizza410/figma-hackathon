@@ -63,7 +63,7 @@ const DiscountItem = () => {
         </div>
 
         {/* Image Section */}
-        <div className="flex-1 relative order-1 lg:order-2 mt-44 lg:mt-12 lg:mr-32">
+        <div className="flex-1 relative order-1 lg:order-2 lg:mt-12 lg:mr-32">
           <Image
             src="/Group 154.png" // Replace with the actual path of your sofa image
             alt="Discount Item"
