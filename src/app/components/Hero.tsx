@@ -39,7 +39,7 @@ const HeroSection = () => {
               </button>
             </div>
 
-            <div className="flex justify-center lg:justify-end mr-28 sm:mt-72 xs:mt-60 lg:static lg:m-0 lg:mr-32">
+            <div className="flex justify-center lg:justify-end mr-28 sm:mt-60 xs:mt-44 lg:static lg:m-0 lg:mr-32">
               <Image
                 src="/sofa.png" 
                 alt="Sofa"
