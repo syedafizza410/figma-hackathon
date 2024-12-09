@@ -120,7 +120,7 @@ const Product = () => {
             </p>
           </div>
 
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
             <div>
               <label htmlFor="perPage" className="text-sm text-gray-700 mr-2">
                 Per Page:
