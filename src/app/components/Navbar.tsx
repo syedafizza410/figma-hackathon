@@ -103,7 +103,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Pages</a>
+              <a href="/Shop" className="text-gray-900 hover:text-purple-600">Pages</a>
               <a href="/ProductDetail" className="text-gray-900 hover:text-purple-600">Products</a>
               <a href="/Blog" className="text-gray-900 hover:text-purple-600">Blog</a>
               <a href="/Contact" className="text-gray-900 hover:text-purple-600">Contact</a>
