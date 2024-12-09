@@ -149,14 +149,14 @@ const Navbar = () => {
               </button>
               {isHomeDropdownOpen && (
                 <div className="ml-4 mt-2 space-y-1">
-                  <a href="/shop-grid-default" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop Grid Default</a>
-                  <a href="/product-details" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Product Details</a>
-                  <a href="/blog-page" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Blog Page</a>
-                  <a href="/contact-us" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Contact Us</a>
-                  <a href="/shop" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop</a>
+                  <a href="/Product" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop Grid Default</a>
+                  <a href="/ProductDetail" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Product Details</a>
+                  <a href="/Blog" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Blog Page</a>
+                  <a href="/Contact" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Contact Us</a>
+                  <a href="/Shop" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop</a>
                   <a href="/cart" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Cart</a>
                   <a href="/login" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Login</a>
-                  <a href="/faq" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">FAQ</a>
+                  <a href="/Faq" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">FAQ</a>
                 </div>
               )}
             </div>
