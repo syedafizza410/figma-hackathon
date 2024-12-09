@@ -139,35 +139,20 @@ const Navbar = () => {
         </div>
 
         <div className={`${isMenuOpen ? "block" : "hidden"} sm:hidden bg-white`}>
-          <div className="px-4 py-2 space-y-2">
-            <div className="relative">
-              <button
-                onClick={toggleHomeDropdown}
-                className="w-full flex justify-between items-center text-gray-900 hover:bg-gray-200 py-2"
-              >
-                <span>Home</span>
-                <FaChevronDown />
-              </button>
-              {isHomeDropdownOpen && (
-                <div className="ml-4 mt-2 space-y-1">
-                  <a href="/Product" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop Grid Default</a>
-                  <a href="/ProductDetail" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Product Details</a>
-                  <a href="/Blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Blog Page</a>
-                  <a href="/Contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
-                  <a href="/Shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Shop</a>
-                  <a href="/cart" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cart</a>
-                  <a href="/login" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a>
-                  <a href="/Faq" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">FAQ</a>
-                </div>
-              )}
-            </div>
-            <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Pages</a>
-            <a href="/Product" className="block text-gray-900 hover:bg-gray-200 py-2">Products</a>
-            <a href="/Blog" className="block text-gray-900 hover:bg-gray-200 py-2">Blog</a>
-            <a href="/Contact" className="block text-gray-900 hover:bg-gray-200 py-2">Contact</a>
-            <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Shop</a>
-          </div>
-          </div>
+  <div className="px-4 py-2 space-y-2 bg-pink-600">
+    <a href="/Product" className="block text-white py-2">Shop Grid Default</a>
+    <a href="/ProductDetail" className="block text-white py-2">Product Details</a>
+    <a href="/Blog" className="block text-white py-2">Blog Page</a>
+    <a href="/Contact" className="block text-white py-2">Contact Us</a>
+    <a href="/Shop" className="block text-white py-2">Shop</a>
+    <a href="/cart" className="block text-white py-2">Cart</a>
+    <a href="/login" className="block text-white py-2">Login</a>
+    <a href="/Faq" className="block text-white py-2">FAQ</a>
+    <a href="/Pages" className="block text-white py-2">Pages</a>
+    <a href="/Products" className="block text-white py-2">Products</a>
+  </div>
+</div>
+
         </div>
     </>
   );
