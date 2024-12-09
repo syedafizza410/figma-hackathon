@@ -1,16 +1,16 @@
-"use client"; 
+"use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MdOutlineEmail } from 'react-icons/md';
-import { FaPhoneVolume, FaChevronDown, FaRegHeart } from 'react-icons/fa6';
-import { LuShoppingCart } from 'react-icons/lu';
-import { GoPerson } from 'react-icons/go';
+import { MdOutlineEmail } from "react-icons/md";
+import { FaPhoneVolume, FaChevronDown, FaRegHeart } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import { LuShoppingCart } from "react-icons/lu";
+import { GoPerson } from "react-icons/go";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
-  const homeDropdownRef = useRef(null);
+  const homeDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,8 +21,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (homeDropdownRef.current && !homeDropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (homeDropdownRef.current && !homeDropdownRef.current.contains(event.target as Node)) {
         setIsHomeDropdownOpen(false);
       }
     };
@@ -151,12 +151,12 @@ const Navbar = () => {
                 <div className="ml-4 mt-2 space-y-1">
                   <a href="/Product" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop Grid Default</a>
                   <a href="/ProductDetail" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Product Details</a>
-                  <a href="/Blog" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Blog Page</a>
-                  <a href="/Contact" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Contact Us</a>
-                  <a href="/Shop" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Shop</a>
-                  <a href="/cart" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Cart</a>
-                  <a href="/login" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">Login</a>
-                  <a href="/Faq" className="block text-gray-700 hover:bg-gray-100 py-1 px-2 rounded">FAQ</a>
+                  <a href="/Blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Blog Page</a>
+                  <a href="/Contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+                  <a href="/Shop" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Shop</a>
+                  <a href="/cart" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cart</a>
+                  <a href="/login" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Login</a>
+                  <a href="/Faq" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">FAQ</a>
                 </div>
               )}
             </div>
@@ -165,8 +165,8 @@ const Navbar = () => {
             <a href="/Contact" className="block text-gray-900 hover:bg-gray-200 py-2">Contact</a>
             <a href="/Shop" className="block text-gray-900 hover:bg-gray-200 py-2">Shop</a>
           </div>
+          </div>
         </div>
-      </div>
     </>
   );
 };
