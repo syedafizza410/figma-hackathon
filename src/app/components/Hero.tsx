@@ -19,7 +19,7 @@ const HeroSection = () => {
                 alt="Lamp"
                 width={150}
                 height={150}
-                className="w-60 h-60 mb-72 ml-12 lg:mt-32" 
+                className="w-60 h-60 mb-72 ml-12 lg:mt-12" 
               />
             </div>
 
