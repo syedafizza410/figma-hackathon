@@ -23,7 +23,7 @@ const HeroSection = () => {
               />
             </div>
 
-            <div className="flex-1 space-y-4 xs:absolute xs:top-72 sm:space-y-6 sm:text-xl sm:absolute sm:top-64 lg:static lg:mt-0 lg:text-left lg:ml-64">
+            <div className="flex-1 space-y-4 xs:absolute xs:top-60 sm:space-y-6 sm:text-xl sm:absolute sm:top-64 lg:static lg:mt-0 lg:text-left lg:ml-64">
               <h4 className="text-pink-500 text-sm uppercase font-semibold sm:text-lg">
                 Best Furniture For Your Castle...
               </h4>
