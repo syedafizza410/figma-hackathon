@@ -113,7 +113,7 @@ const LatestProducts: React.FC = () => {
               </div>
 
               {index === 1 && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div className="absolute inset-0 mt-52 flex items-start lg:mt-72 ml-8">
                   <div className="flex space-x-2">
                     <button className="bg-gray-200 p-2 rounded-full text-blue-700">
                       <ShoppingCartIcon className="h-5 w-5" />

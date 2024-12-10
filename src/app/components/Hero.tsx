@@ -34,9 +34,9 @@ const HeroSection = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est 
                 <br /> adipiscing in phasellus non in justo.
               </p>
-              <button className="bg-pink-500 text-white py-3 px-6 rounded-md shadow-md text-sm hover:bg-pink-600 transition">
-               Shop Now
-              </button>
+            <button className="bg-pink-500 text-white py-3 px-6 rounded-md shadow-md text-sm hover:bg-pink-600 transition mt-4">
+            <a href='/cart'>Shop Now</a> 
+            </button>
             </div>
 
             <div className="flex justify-center lg:justify-end mr-28 sm:mt-60 xs:mt-44 lg:static lg:m-0 lg:mr-32">

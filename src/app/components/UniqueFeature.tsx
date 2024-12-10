@@ -35,8 +35,8 @@ const UniqueFeatures = () => {
             </li>
           </ul>
           <div className="mt-6 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
-            <button className="bg-pink-500 text-white py-3 px-6 rounded-md shadow-md text-sm hover:bg-pink-600 transition">
-              Add To Cart
+          <button className="bg-pink-500 text-white py-3 px-6 rounded-md shadow-md text-sm hover:bg-pink-600 transition mt-4">
+            <a href='/cart'>Add To Cart</a> 
             </button>
             <span className="text-blue-900 font-semibold">
               B&B Italian Sofa <br />

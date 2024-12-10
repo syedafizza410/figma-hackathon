@@ -9,7 +9,7 @@ export default function CustomDiv() {
           Get Latest Update By Subscribe <br /> Our Newsletter
         </p>
         <button className="mt-4 px-6 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 text-sm sm:text-base md:text-lg lg:text-xl">
-          Shop Now
+        <a href='/cart'>Shop Now</a> 
         </button>
       </div>
     </div>
