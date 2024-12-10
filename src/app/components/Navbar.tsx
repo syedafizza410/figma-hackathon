@@ -140,6 +140,7 @@ const Navbar = () => {
 
         <div className={`${isMenuOpen ? "block" : "hidden"} sm:hidden bg-white`}>
   <div className="px-4 py-2 space-y-2 bg-pink-600">
+    <a href="/" className="block text-white py-2">Home</a>
     <a href="/Product" className="block text-white py-2">Shop Grid Default</a>
     <a href="/ProductDetail" className="block text-white py-2">Product Details</a>
     <a href="/Blog" className="block text-white py-2">Blog Page</a>
@@ -148,8 +149,6 @@ const Navbar = () => {
     <a href="/cart" className="block text-white py-2">Cart</a>
     <a href="/login" className="block text-white py-2">Login</a>
     <a href="/Faq" className="block text-white py-2">FAQ</a>
-    <a href="/Pages" className="block text-white py-2">Pages</a>
-    <a href="/Products" className="block text-white py-2">Products</a>
   </div>
 </div>
 
