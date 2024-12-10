@@ -9,6 +9,7 @@ import DiscountItem from "./components/DiscountItems";
 import CategorySection from "./components/Topcategories";
 import CustomDiv from "./components/Custom";
 import LatestBlog from "./components/Blog";
+import PartnersSection from "./components/PartnerSection";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <DiscountItem />
         <CategorySection />
         <CustomDiv />
+        <PartnersSection />
         <LatestBlog />
       </main>
     </div>

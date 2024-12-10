@@ -5,7 +5,7 @@ export default function TopCategories() {
       <h2 className="text-2xl md:text-4xl font-bold text-blue-900 mb-8">
         Top Categories
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
         <div className="w-56 flex flex-col items-center">
           <div className="relative">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-purple-100 flex items-center justify-center relative border-4 border-purple-500">
