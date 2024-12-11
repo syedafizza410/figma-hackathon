@@ -92,9 +92,6 @@ const LatestProducts: React.FC = () => {
               {product.sale && index === 1 && (
                 <div className="absolute top-4 left-4">
                   <Image src="/Group 27.png" alt="Sale Badge" width={65} height={65} />
-                  <div className="absolute top-5 left-4 w-16 h-6 text-white text-xs font-semibold flex items-center justify-center transform -rotate-12">
-                    Sale
-                  </div>
                 </div>
               )}
 
