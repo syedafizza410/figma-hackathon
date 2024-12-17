@@ -3,8 +3,8 @@ import Link from "next/link";
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
-  AiOutlineEye,
 } from "react-icons/ai";
+import { FaSearch } from "react-icons/fa";
 
 const shoplist = [
   {
@@ -201,16 +201,16 @@ const ShopList = () => {
                 </div>
 
                 <div className="mt-4 flex space-x-4">
-                  <button className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:bg-gray-300">
-                    <AiOutlineHeart size={24} />
+                  <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
+                    <AiOutlineShoppingCart size={24} />
                   </button>
                   <Link href="/cart">
-                    <button className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:bg-gray-300">
-                      <AiOutlineShoppingCart size={24} />
+                    <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
+                      <AiOutlineHeart size={24} />
                     </button>
                   </Link>
-                  <button className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full hover:bg-gray-300">
-                    <AiOutlineEye size={24} />
+                  <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
+                    <FaSearch size={24} />
                   </button>
                 </div>
               </div>

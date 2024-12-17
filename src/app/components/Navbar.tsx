@@ -24,7 +24,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (homeDropdownRef.current && !homeDropdownRef.current.contains(event.target as Node)) {
+      if (
+        homeDropdownRef.current &&
+        !homeDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsHomeDropdownOpen(false);
       }
     };
@@ -59,15 +62,24 @@ const Navbar = () => {
                 <span>USD</span>
                 <FaChevronDown />
               </div>
-              <Link href="/login" className="flex items-center text-white space-x-2">
+              <Link
+                href="/login"
+                className="flex items-center text-white space-x-2"
+              >
                 <GoPerson />
                 <span>Log in</span>
               </Link>
-              <Link href="/Product" className="flex items-center text-white space-x-2">
+              <Link
+                href="/Product"
+                className="flex items-center text-white space-x-2"
+              >
                 <FaRegHeart />
                 <span>Wishlist</span>
               </Link>
-              <Link href="/cart" className="flex items-center text-white space-x-2">
+              <Link
+                href="/cart"
+                className="flex items-center text-white space-x-2"
+              >
                 <LuShoppingCart />
                 <span>Cart</span>
               </Link>
@@ -82,7 +94,9 @@ const Navbar = () => {
             <h1 className="text-3xl font-serif">Hekto</h1>
 
             <div className="hidden sm:flex space-x-6">
-              <Link href="/" className="text-pink-600">Home</Link>
+              <Link href="/" className="text-pink-600">
+                Home
+              </Link>
               <div className="relative" ref={homeDropdownRef}>
                 <button
                   onClick={toggleHomeDropdown}
@@ -94,18 +108,51 @@ const Navbar = () => {
                 </button>
                 {isHomeDropdownOpen && (
                   <div className="absolute left-0 mt-2 w-48 bg-pink-500 border rounded-md shadow-lg z-20">
-                    <Link href="/Product" className="block px-4 py-2 text-white">Shop Grid Default</Link>
-                    <Link href="/Shop" className="block px-4 py-2 text-white">Shop Left SideBar</Link>
-                    <Link href="/cart" className="block px-4 py-2 text-white">Cart</Link>
-                    <Link href="/login" className="block px-4 py-2 text-white">My Account</Link>
-                    <Link href="/Faq" className="block px-4 py-2 text-white">FAQ</Link>
+                    <Link
+                      href="/Product"
+                      className="block px-4 py-2 text-white"
+                    >
+                      Shop Grid Default
+                    </Link>
+                    <Link href="/Shop" className="block px-4 py-2 text-white">
+                      Shop Left SideBar
+                    </Link>
+                    <Link href="/cart" className="block px-4 py-2 text-white">
+                      Cart
+                    </Link>
+                    <Link href="/login" className="block px-4 py-2 text-white">
+                      My Account
+                    </Link>
+                    <Link href="/Faq" className="block px-4 py-2 text-white">
+                      FAQ
+                    </Link>
                   </div>
                 )}
               </div>
-              <Link href="/ProductDetail" className="text-gray-900 hover:text-pink-500">Product</Link>
-              <Link href="/Blog" className="text-gray-900 hover:text-purple-600">Blog</Link>
-              <Link href="/Contact" className="text-gray-900 hover:text-purple-600">Contact</Link>
-              <Link href="/Shoplist" className="text-gray-900 hover:text-purple-600">Shop</Link>
+              <Link
+                href="/ProductDetail"
+                className="text-gray-900 hover:text-pink-500"
+              >
+                Product
+              </Link>
+              <Link
+                href="/Blog"
+                className="text-gray-900 hover:text-purple-600"
+              >
+                Blog
+              </Link>
+              <Link
+                href="/Contact"
+                className="text-gray-900 hover:text-purple-600"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/Shoplist"
+                className="text-gray-900 hover:text-purple-600"
+              >
+                Shop
+              </Link>
             </div>
 
             <div className="sm:flex items-center">
@@ -118,77 +165,78 @@ const Navbar = () => {
                 <FaSearch />
               </button>
             </div>
-                {/* Mobile Menu Toggle */}
-          <button
-            className="sm:hidden flex items-left"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <XIcon className="w-6 h-6 text-black" />
-            ) : (
-              <MenuIcon className="w-6 h-6 text-black" />
-            )}
-          </button>
+            <button
+              className="sm:hidden flex items-left"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <XIcon className="w-6 h-6 text-black" />
+              ) : (
+                <MenuIcon className="w-6 h-6 text-black" />
+              )}
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="sm:hidden flex flex-col items-left px-4 py-2 border-t bg-pink-500">
-           <li>
-              <Link className="block py-2 text-white" href="/">
-                Home
-              </Link>
-            </li>
-          <button
-            className="text-white text-left"
-            onClick={() => setIsHomeDropdownOpen(!isHomeDropdownOpen)}
-          >
-            Pages
-          </button>
-          {isHomeDropdownOpen && (
-            <ul className="w-full text-left shadow-md rounded-md text-black text-sm">
-              <li className="px-4 py-2 text-white">
-                <Link href="/Product">Shop Grid Default</Link>
+        {isMenuOpen && (
+          <div className="sm:hidden flex flex-col px-4 py-2 border-t bg-pink-500">
+            <ul className="w-full text-left">
+              <li>
+                <Link className="block py-2 text-white" href="/">
+                  Home
+                </Link>
               </li>
-              <li className="px-4 py-2 text-white">
-                      <Link href="/login">My Account</Link>
-                    </li>
-                    <li className="px-4 py-2 text-white">
-                      <Link href="/Shop">Shop Leftsidebar</Link>
-                    </li>
-                    <li className="px-4 py-2 text-white">
-                      <Link href="/cart">Cart</Link>
-                    </li>
-              <li className="px-4 py-2 text-white">
-                <Link href="/Faq">FAQ</Link>
+              <li>
+                <Link href="/Product" className="block py-2 text-white">
+                  Pages
+                </Link>
+              </li>
+              <li>
+                <Link href="/Product" className="block py-2 text-white">
+                  Shop Grid Default
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" className="block py-2 text-white">
+                  My Account
+                </Link>
+              </li>
+              <li>
+                <Link href="/Shop" className="block py-2 text-white">
+                  Shop Left Sidebar
+                </Link>
+              </li>
+              <li>
+                <Link href="/cart" className="block py-2 text-white">
+                  Cart
+                </Link>
+              </li>
+              <li>
+                <Link href="/Faq" className="block py-2 text-white">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link className="block py-2 text-white" href="/ProductDetail">
+                  Product
+                </Link>
+              </li>
+              <li>
+                <Link className="block py-2 text-white" href="/Blog">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link className="block py-2 text-white" href="/Shoplist">
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link className="block py-2 text-white" href="/Contact">
+                  Contact
+                </Link>
               </li>
             </ul>
-          )}
-
-          {/* Mobile Navigation Links */}
-          <ul className="w-full text-left">
-            <li>
-              <Link className="block py-2 text-white" href="/ProductDetail">
-                Product
-              </Link>
-            </li>
-            <li>
-              <Link className="block py-2 text-white" href="/Blog">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link className="block py-2 text-white" href="/Shoplist">
-                Shop
-              </Link>
-            </li>
-            <li>
-              <Link className="block py-2 text-white" href="/Contact">
-                Contact
-              </Link>
-            </li>
-          </ul>
           </div>
         )}
       </div>

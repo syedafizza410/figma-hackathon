@@ -2,6 +2,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
+import { FaSearch } from "react-icons/fa";
+
 
 export default function Home() {
   const [perPage, setPerPage] = useState<number>(10);
@@ -47,7 +53,7 @@ export default function Home() {
     },
     {
       id: 5,
-      name: "Mauris Quis",
+      name: "Marbi sagittis",
       description: "Magna in est adipiscing in phasellus non in justo.",
       price: 26.0,
       oldPrice: 52.0,
@@ -56,7 +62,7 @@ export default function Home() {
     },
     {
       id: 6,
-      name: "Mauris Quis",
+      name: "Ultricies venenatis",
       description: "Magna in est adipiscing in phasellus non in justo.",
       price: 26.0,
       oldPrice: 52.0,
@@ -65,7 +71,7 @@ export default function Home() {
     },
     {
       id: 7,
-      name: "Mauris Quis",
+      name: "Scelerisque dignissim",
       description: "Magna in est adipiscing in phasellus non in justo.",
       price: 26.0,
       oldPrice: 52.0,
@@ -533,29 +539,29 @@ export default function Home() {
                     <span className="text-lg font-bold text-blue-900">
                       ${product.price.toFixed(2)}
                     </span>
-                    <span className="ml-2 line-through text-red-500">
+                    <span className="ml-2 line-through text-pink-500">
                       ${product.oldPrice.toFixed(2)}
                     </span>
                   </div>
 
-                  <div className="mt-2 flex space-x-2">
+                  <div className="mt-2 flex space-x-4">
                     <button
-                      className="text-gray-500 hover:text-indigo-600"
+                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
                       aria-label="Add to Wishlist"
                     >
-                      ❤
+                    <AiOutlineShoppingCart size={24} />
                     </button>
                     <button
-                      className="text-gray-500 hover:text-indigo-600"
+                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
                       aria-label="View Details"
                     >
-                      ⌕
+                      <AiOutlineHeart size={24} />
                     </button>
                     <button
-                      className="text-gray-500 hover:text-indigo-600"
+                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
                       aria-label="Add to Cart"
                     >
-                      🛒
+                      <FaSearch size={24} />
                     </button>
                   </div>
                 </div>
