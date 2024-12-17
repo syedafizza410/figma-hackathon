@@ -19,11 +19,11 @@ const HeroSection = () => {
                 alt="Lamp"
                 width={150}
                 height={150}
-                className="w-60 h-60 mb-96 ml-12 lg:mb-72 sm:mb-60" 
+                className="w-60 h-60 ml-12 lg:mb-72 sm:mb-60" 
               />
             </div>
 
-            <div className="flex-1 space-y-4 xs:absolute xs:top-64 sm:space-y-6 sm:text-xl sm:absolute sm:top-64 lg:static lg:mt-0 lg:text-left lg:ml-64">
+            <div className="flex-1 space-y-4 xs:absolute top-64 sm:space-y-6 sm:text-xl sm:absolute lg:static lg:mt-0 lg:text-left lg:ml-64">
               <h4 className="text-pink-500 text-sm uppercase font-semibold sm:text-lg">
                 Best Furniture For Your Castle...
               </h4>
@@ -39,7 +39,7 @@ const HeroSection = () => {
             </button>
             </div>
 
-            <div className="flex justify-center lg:justify-end mr-28 sm:mt-32 lg:static lg:m-0 lg:mr-32">
+            <div className="flex justify-center lg:justify-end mr-28 xs:mt-72 sm:mt-32 lg:static lg:m-0 lg:mr-32">
               <Image
                 src="/sofa.png" 
                 alt="Sofa"

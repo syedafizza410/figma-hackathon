@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="mt-8 text-center text-gray-500 text-sm">
-        ©Webecy - All Rights Reserved
+        ©Umm e Fizza - All Rights Reserved
       </div>
     </footer>
   );

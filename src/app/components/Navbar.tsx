@@ -6,6 +6,8 @@ import { FaPhoneVolume, FaChevronDown, FaRegHeart } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 import { GoPerson } from "react-icons/go";
+import { XIcon, MenuIcon } from "@heroicons/react/outline";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,18 +59,18 @@ const Navbar = () => {
                 <span>USD</span>
                 <FaChevronDown />
               </div>
-              <a href="/login" className="flex items-center text-white space-x-2">
+              <Link href="/login" className="flex items-center text-white space-x-2">
                 <GoPerson />
                 <span>Log in</span>
-              </a>
-              <a href="/Product" className="flex items-center text-white space-x-2">
+              </Link>
+              <Link href="/Product" className="flex items-center text-white space-x-2">
                 <FaRegHeart />
                 <span>Wishlist</span>
-              </a>
-              <a href="/cart" className="flex items-center text-white space-x-2">
+              </Link>
+              <Link href="/cart" className="flex items-center text-white space-x-2">
                 <LuShoppingCart />
                 <span>Cart</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -77,40 +79,36 @@ const Navbar = () => {
       <div className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-2xl font-serif">Hekto</h1>
+            <h1 className="text-3xl font-serif">Hekto</h1>
 
             <div className="hidden sm:flex space-x-6">
+              <Link href="/" className="text-pink-600">Home</Link>
               <div className="relative" ref={homeDropdownRef}>
                 <button
                   onClick={toggleHomeDropdown}
-                  className="flex items-center text-pink-600 focus:outline-none"
+                  aria-expanded={isHomeDropdownOpen}
+                  className="flex items-center text-gray-900 hover:text-pink-500"
                 >
-                  <a href="/"><span>Home</span></a>
+                  Pages
                   <FaChevronDown className="ml-1" />
                 </button>
-
                 {isHomeDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-48 bg-pink-600 border rounded-md shadow-lg z-20">
-                    <a href="/Product" className="block px-4 py-2 text-white">Shop Grid Default</a>
-                    <a href="/ProductDetail" className="block px-4 py-2 text-white">Product Details</a>
-                    <a href="/Blog" className="block px-4 py-2 text-white">Blog Page</a>
-                    <a href="/Contact" className="block px-4 py-2 text-white">Contact Us</a>
-                    <a href="/Shop" className="block px-4 py-2 text-white">Shop</a>
-                    <a href="/cart" className="block px-4 py-2 text-white">Cart</a>
-                    <a href="/login" className="block px-4 py-2 text-white">Login</a>
-                    <a href="/Faq" className="block px-4 py-2 text-white">FAQ</a>
+                  <div className="absolute left-0 mt-2 w-48 bg-pink-500 border rounded-md shadow-lg z-20">
+                    <Link href="/Product" className="block px-4 py-2 text-white">Shop Grid Default</Link>
+                    <Link href="/Shop" className="block px-4 py-2 text-white">Shop Left SideBar</Link>
+                    <Link href="/cart" className="block px-4 py-2 text-white">Cart</Link>
+                    <Link href="/login" className="block px-4 py-2 text-white">My Account</Link>
+                    <Link href="/Faq" className="block px-4 py-2 text-white">FAQ</Link>
                   </div>
                 )}
               </div>
-
-              <a href="/Shop" className="text-gray-900 hover:text-purple-600">Pages</a>
-              <a href="/ProductDetail" className="text-gray-900 hover:text-purple-600">Products</a>
-              <a href="/Blog" className="text-gray-900 hover:text-purple-600">Blog</a>
-              <a href="/Contact" className="text-gray-900 hover:text-purple-600">Contact</a>
-              <a href="/Shop" className="text-gray-900 hover:text-purple-600">Shop</a>
+              <Link href="/ProductDetail" className="text-gray-900 hover:text-pink-500">Product</Link>
+              <Link href="/Blog" className="text-gray-900 hover:text-purple-600">Blog</Link>
+              <Link href="/Contact" className="text-gray-900 hover:text-purple-600">Contact</Link>
+              <Link href="/Shoplist" className="text-gray-900 hover:text-purple-600">Shop</Link>
             </div>
 
-            <div className="hidden sm:flex items-center">
+            <div className="sm:flex items-center">
               <input
                 type="text"
                 className="border border-gray-300 rounded-md p-2 text-sm"
@@ -120,39 +118,80 @@ const Navbar = () => {
                 <FaSearch />
               </button>
             </div>
+                {/* Mobile Menu Toggle */}
+          <button
+            className="sm:hidden flex items-left"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <XIcon className="w-6 h-6 text-black" />
+            ) : (
+              <MenuIcon className="w-6 h-6 text-black" />
+            )}
+          </button>
+        </div>
+      </div>
 
-            <button
-              className="sm:hidden text-purple-600"
-              onClick={toggleMenu}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="sm:hidden flex flex-col items-left px-4 py-2 border-t bg-pink-500">
+           <li>
+              <Link className="block py-2 text-white" href="/">
+                Home
+              </Link>
+            </li>
+          <button
+            className="text-white text-left"
+            onClick={() => setIsHomeDropdownOpen(!isHomeDropdownOpen)}
+          >
+            Pages
+          </button>
+          {isHomeDropdownOpen && (
+            <ul className="w-full text-left shadow-md rounded-md text-black text-sm">
+              <li className="px-4 py-2 text-white">
+                <Link href="/Product">Shop Grid Default</Link>
+              </li>
+              <li className="px-4 py-2 text-white">
+                      <Link href="/login">My Account</Link>
+                    </li>
+                    <li className="px-4 py-2 text-white">
+                      <Link href="/Shop">Shop Leftsidebar</Link>
+                    </li>
+                    <li className="px-4 py-2 text-white">
+                      <Link href="/cart">Cart</Link>
+                    </li>
+              <li className="px-4 py-2 text-white">
+                <Link href="/Faq">FAQ</Link>
+              </li>
+            </ul>
+          )}
+
+          {/* Mobile Navigation Links */}
+          <ul className="w-full text-left">
+            <li>
+              <Link className="block py-2 text-white" href="/ProductDetail">
+                Product
+              </Link>
+            </li>
+            <li>
+              <Link className="block py-2 text-white" href="/Blog">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link className="block py-2 text-white" href="/Shoplist">
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link className="block py-2 text-white" href="/Contact">
+                Contact
+              </Link>
+            </li>
+          </ul>
           </div>
-        </div>
-
-        <div className={`${isMenuOpen ? "block" : "hidden"} sm:hidden bg-white`}>
-  <div className="px-4 py-2 space-y-2 bg-pink-600">
-    <a href="/" className="block text-white py-2">Home</a>
-    <a href="/Product" className="block text-white py-2">Shop Grid Default</a>
-    <a href="/ProductDetail" className="block text-white py-2">Product Details</a>
-    <a href="/Blog" className="block text-white py-2">Blog Page</a>
-    <a href="/Contact" className="block text-white py-2">Contact Us</a>
-    <a href="/Shop" className="block text-white py-2">Shop</a>
-    <a href="/cart" className="block text-white py-2">Cart</a>
-    <a href="/login" className="block text-white py-2">Login</a>
-    <a href="/Faq" className="block text-white py-2">FAQ</a>
-  </div>
-</div>
-
-        </div>
+        )}
+      </div>
     </>
   );
 };
