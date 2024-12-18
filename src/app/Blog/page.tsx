@@ -7,10 +7,10 @@ const BlogPage = () => {
   return (
     <div className="bg-white text-gray-800 ">
       <div className="py-12 px-8 bg-purple-50 h-44">
-        <h1 className="max-w-6xl mx-auto text-4xl font-bold">Blog Page</h1>
+        <h1 className="max-w-6xl mx-auto text-4xl font-bold text-blue-900">Blog Page</h1>
         <div className="max-w-6xl mx-auto flex items-center gap-2">
-          <Link href={"/"}>Home</Link>
-          <p>Pages</p>
+          <Link href={"/"} className="text-blue-900">Home</Link>
+          <p className="text-blue-900">Pages</p>
           <p className="text-[#FB2E86]">Blog Page</p>
         </div>
       </div>

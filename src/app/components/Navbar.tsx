@@ -94,18 +94,19 @@ const Navbar = () => {
             <h1 className="text-3xl font-serif">Hekto</h1>
 
             <div className="hidden sm:flex space-x-6">
-              <Link href="/" className="text-pink-600">
+              <Link href="/" className="text-pink-500">
                 Home
               </Link>
               <div className="relative" ref={homeDropdownRef}>
-                <button
+                <Link
                   onClick={toggleHomeDropdown}
                   aria-expanded={isHomeDropdownOpen}
                   className="flex items-center text-gray-900 hover:text-pink-500"
+                  href="/HektoDemo"
                 >
                   Pages
                   <FaChevronDown className="ml-1" />
-                </button>
+                </Link>
                 {isHomeDropdownOpen && (
                   <div className="absolute left-0 mt-2 w-48 bg-pink-500 border rounded-md shadow-lg z-20">
                     <Link
@@ -137,19 +138,19 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/Blog"
-                className="text-gray-900 hover:text-purple-600"
+                className="text-gray-900 hover:text-pink-500"
               >
                 Blog
               </Link>
               <Link
                 href="/Contact"
-                className="text-gray-900 hover:text-purple-600"
+                className="text-gray-900 hover:text-pink-500"
               >
                 Contact
               </Link>
               <Link
                 href="/Shoplist"
-                className="text-gray-900 hover:text-purple-600"
+                className="text-gray-900 hover:text-pink-500"
               >
                 Shop
               </Link>
@@ -187,7 +188,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Product" className="block py-2 text-white">
+                <Link href="/HektoDemo" className="block py-2 text-white">
                   Pages
                 </Link>
               </li>
