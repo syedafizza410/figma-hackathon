@@ -155,7 +155,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="sm:flex items-center">
+            <div className="hidden sm:flex items-center">
               <input
                 type="text"
                 className="border border-gray-300 rounded-md p-2 text-sm"
