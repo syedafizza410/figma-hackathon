@@ -20,7 +20,7 @@ const CheckoutPage = () => {
             </p>
           </div>
 
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md mt-28">
+          <div className="bg-purple-50 p-6 rounded-lg shadow-md mt-28">
             <div className="mb-8">
               <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-semibold text-indigo-900">
@@ -186,7 +186,7 @@ const CheckoutPage = () => {
             </ul>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+          <div className="bg-purple-50 p-6 rounded-lg shadow-md">
             <div className="flex justify-between mb-2">
               <p className="text-blue-900">Subtotals:</p>
               <p className="font-semibold text-blue-900">£219.00</p>
