@@ -193,11 +193,6 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/Product" className="block py-2 text-white">
-                  Shop Grid Default
-                </Link>
-              </li>
-              <li>
                 <Link href="/login" className="block py-2 text-white">
                   My Account
                 </Link>
@@ -205,11 +200,6 @@ const Navbar = () => {
               <li>
                 <Link href="/Shop" className="block py-2 text-white">
                   Shop Left Sidebar
-                </Link>
-              </li>
-              <li>
-                <Link href="/cart" className="block py-2 text-white">
-                  Cart
                 </Link>
               </li>
               <li>
