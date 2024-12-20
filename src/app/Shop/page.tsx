@@ -75,7 +75,7 @@ export default function Home() {
       description: "Magna in est adipiscing in phasellus non in justo.",
       price: 26.0,
       oldPrice: 52.0,
-      image: "/shop7.png",
+      image: "/Shop7.png",
       rating: 4,
     },
   ];
