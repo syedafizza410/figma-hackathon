@@ -49,9 +49,9 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-6">
-      <div className="w-full bg-gray-100 py-6">
+      <div className="w-full h-44 bg-purple-50 py-6">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-indigo-900">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-indigo-900 mt-7">Shopping Cart</h1>
           <p className="text-sm text-gray-600">
             Home . Pages . <span className="text-pink-500">Shopping Cart</span>
           </p>
