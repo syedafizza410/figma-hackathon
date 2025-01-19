@@ -91,30 +91,23 @@ const Navbar = () => {
       <div className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-3xl font-serif">Hekto</h1>
+            <h1 className="text-3xl font-serif">
+              <Link href="/HektoDemo">Hekto </Link>
+            </h1>
 
             <div className="hidden sm:flex space-x-6">
-              <Link href="/" className="text-pink-500">
-                Home
-              </Link>
               <div className="relative" ref={homeDropdownRef}>
                 <Link
                   onClick={toggleHomeDropdown}
                   aria-expanded={isHomeDropdownOpen}
-                  className="flex items-center text-gray-900 hover:text-pink-500"
-                  href="/HektoDemo"
+                  className="flex items-center text-pink-500 hover:text-pink-500 cursor-pointer"
+                  href="/"
                 >
-                  Pages
+                  Home
                   <FaChevronDown className="ml-1" />
                 </Link>
                 {isHomeDropdownOpen && (
                   <div className="absolute left-0 mt-2 w-48 bg-pink-500 border rounded-md shadow-lg z-20">
-                    <Link
-                      href="/Product"
-                      className="block px-4 py-2 text-white"
-                    >
-                      Shop Grid Default
-                    </Link>
                     <Link href="/Shop" className="block px-4 py-2 text-white">
                       Shop Left SideBar
                     </Link>
@@ -124,22 +117,25 @@ const Navbar = () => {
                     <Link href="/login" className="block px-4 py-2 text-white">
                       My Account
                     </Link>
+                    <Link href="/about" className="block px-4 py-2 text-white">
+                      About Us
+                    </Link>
                     <Link href="/Faq" className="block px-4 py-2 text-white">
                       FAQ
                     </Link>
                   </div>
                 )}
               </div>
+              <Link href="/Product" className="text-gray-900 hover:text-pink-500">
+                Pages
+              </Link>
               <Link
                 href="/ProductDetail"
                 className="text-gray-900 hover:text-pink-500"
               >
                 Product
               </Link>
-              <Link
-                href="/Blog"
-                className="text-gray-900 hover:text-pink-500"
-              >
+              <Link href="/Blog" className="text-gray-900 hover:text-pink-500">
                 Blog
               </Link>
               <Link
@@ -148,10 +144,7 @@ const Navbar = () => {
               >
                 Contact
               </Link>
-              <Link
-                href="/Shoplist"
-                className="text-gray-900 hover:text-pink-500"
-              >
+              <Link href="/Shoplist" className="text-gray-900 hover:text-pink-500">
                 Shop
               </Link>
             </div>
@@ -159,10 +152,9 @@ const Navbar = () => {
             <div className="hidden sm:flex items-center">
               <input
                 type="text"
-                className="border border-gray-300 rounded-md p-2 text-sm"
-                placeholder="Search..."
+                className="border border-gray-300 p-2 text-sm"
               />
-              <button className="ml-2 bg-pink-500 text-white p-2 rounded">
+              <button className="bg-pink-500 text-white p-3">
                 <FaSearch />
               </button>
             </div>
@@ -188,23 +180,13 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/HektoDemo" className="block py-2 text-white">
+                <Link href="/Product" className="block py-2 text-white">
                   Pages
-                </Link>
-              </li>
-              <li>
-                <Link href="/login" className="block py-2 text-white">
-                  My Account
                 </Link>
               </li>
               <li>
                 <Link href="/Shop" className="block py-2 text-white">
                   Shop Left Sidebar
-                </Link>
-              </li>
-              <li>
-                <Link href="/Faq" className="block py-2 text-white">
-                  FAQ
                 </Link>
               </li>
               <li>
@@ -223,8 +205,18 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+                <Link className="block py-2 text-white" href="/about">
+                  About Us
+                </Link>
+              </li>
+              <li>
                 <Link className="block py-2 text-white" href="/Contact">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/Faq" className="block py-2 text-white">
+                  FAQ
                 </Link>
               </li>
             </ul>

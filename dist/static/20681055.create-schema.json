@@ -1,0 +1,139 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Name is required"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Upload an image of the product.",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Price is required"
+          }
+        ],
+        "name": "price",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 150
+              }
+            ],
+            "level": "warning",
+            "message": "Keep the description under 150 characters."
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "warning",
+            "message": "Discount must be between 0 and 100."
+          }
+        ],
+        "name": "discountPercentage",
+        "type": "number"
+      },
+      {
+        "name": "isFeaturedProduct",
+        "type": "boolean"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error",
+            "message": "Stock level must be a positive number."
+          }
+        ],
+        "name": "stockLevel",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Chair",
+              "value": "Chair"
+            },
+            {
+              "title": "Sofa",
+              "value": "Sofa"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "Chair",
+                  "Sofa"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error",
+            "message": "Category is required"
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      }
+    ],
+    "name": "product",
+    "type": "document"
+  }
+]
