@@ -14,33 +14,22 @@ function ProductsSearch() {
     const searchParams = useSearchParams(); // Access search params from the URL
     const searchQuery = searchParams?.get('search') || ''; // Get the 'search' parameter
 
-    // Fetch all products initially
-    useEffect(() => {
-        async function fetchProducts() {
-            const allProducts = await getProducts(); // Fetch all products
-            setProducts(allProducts);
-        }
-        fetchProducts();
-    }, []);
+   
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const allProducts = await getProducts(); 
+        setProducts(allProducts);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    }
+    fetchProducts();
+  }, []);
 
-    const filteredProducts = products
-    .filter((product) => {
-        if (filteredCategory) {
-            return product.category?.toLowerCase() === filteredCategory.toLowerCase();
-        }
-        return true;
-    })
-    .filter((product) => {
-        if (searchQuery) {
-            return (
-                product.name.toLowerCase().includes(searchQuery.toLowerCase()) || // Match product name
-                product.tags?.some((tag: string) =>
-                    tag.toLowerCase().includes(searchQuery.toLowerCase())
-                ) // Match tags (if any)
-            );
-        }
-        return true;
-    });
+  const filteredProducts = products
+  .filter((product) => filteredCategory ? product.category?.toLowerCase() === filteredCategory.toLowerCase() : true)
+  .filter((product) => searchQuery ? product.name.toLowerCase().includes(searchQuery.toLowerCase()) : true);
 
     return (
         <div className="p-5">

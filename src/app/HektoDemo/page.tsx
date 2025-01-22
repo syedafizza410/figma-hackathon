@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const CheckoutPage = () => {
@@ -12,7 +11,8 @@ const CheckoutPage = () => {
 
   // Form state initialization
   const [formDetails, setFormDetails] = useState(() => {
-  const savedFormDetails = typeof window !== "undefined" ? localStorage.getItem("formDetails") : null;
+    if (typeof window === "undefined") return null;
+    const savedFormDetails = localStorage.getItem("formDetails");
     return savedFormDetails
       ? JSON.parse(savedFormDetails)
       : {
@@ -53,26 +53,23 @@ const CheckoutPage = () => {
   const isProceedEnabled = isFormValid && cart.length > 0;
 
   const handleProceedToCheckout = () => {
-    // Save form and cart details to localStorage
-    localStorage.setItem("formDetails", JSON.stringify(formDetails));
-    localStorage.setItem("cartDetails", JSON.stringify(cart));
-
-    // Reset form and cart on checkout page
-    setFormDetails({
-      email: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      apartment: "",
-      country: "",
-      city: "",
-      postalCode: "",
-    });
+    if (typeof window !== "undefined") {
+      localStorage.setItem("formDetails", JSON.stringify(formDetails));
+      localStorage.setItem("cartDetails", JSON.stringify(cart));
+    }
     clearCart();
-
-    // Navigate to the payment page
     router.push("/payment");
   };
+
+  if (!formDetails) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <p className="text-center text-red-500">
+          Loading form details. Please wait...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 md:p-8">
@@ -259,15 +256,16 @@ const CheckoutPage = () => {
               </div>
               <br />
               <button
-            disabled={!isProceedEnabled}
-            className={`w-full mt-4 py-2 rounded-md ${
-              isFormValid
-                ? "bg-green-500 text-white hover:bg-green-600"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            <Link href={isProceedEnabled ? "/payment" : "#"}>Proceed To Checkout</Link>
-          </button>
+                disabled={!isFormValid}
+                onClick={isFormValid ? handleProceedToCheckout : undefined}
+                className={`w-full mt-4 py-2 rounded-md ${
+                  isFormValid
+                    ? "bg-green-500 text-white hover:bg-green-600"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+              >
+                Proceed to Payment
+              </button>
         </div>
       </div>
     </div>

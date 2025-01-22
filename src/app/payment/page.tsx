@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../contexts/CartContext";
 import { useRouter } from "next/navigation";
 
@@ -9,7 +9,8 @@ const PaymentPage = () => {
   const router = useRouter();
 
   const [formDetails, setFormDetails] = useState(() => {
-    const savedFormDetails = typeof window !== "undefined" ? localStorage.getItem("formDetails") : null;
+    if (typeof window === "undefined") return null; 
+    const savedFormDetails = localStorage.getItem("formDetails");
     return savedFormDetails ? JSON.parse(savedFormDetails) : null;
   });
 
@@ -35,31 +36,29 @@ const PaymentPage = () => {
 
   useEffect(() => {
     // Load cart details from localStorage if needed (e.g., for page refresh scenarios)
-    const savedCart = typeof window !== "undefined" ? localStorage.getItem("cartDetails") : null;
-    if (savedCart) {
-      const parsedCart = JSON.parse(savedCart);
-      parsedCart.forEach((item) => {
-        const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-        if (!existingItem) {
-          // Ensure cart state is consistent if the localStorage cart is not in sync
-        }
-      });
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cartDetails");
+      if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+        parsedCart.forEach((item) => {
+          const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+          if (!existingItem) {
+            // Handle mismatched cart items if necessary
+          }
+        });
+      }
     }
   }, [cart]);
 
   if (!formDetails) {
     return (
       <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">
-          Payment Page
-        </h1>
         <p className="text-center text-red-500">
-          No form details found. Please go back to the checkout page.
+          No form details found. Please return to the checkout page.
         </p>
       </div>
     );
   }
-
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">
