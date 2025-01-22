@@ -12,7 +12,7 @@ const CheckoutPage = () => {
 
   // Form state initialization
   const [formDetails, setFormDetails] = useState(() => {
-    const savedFormDetails = localStorage.getItem("formDetails");
+  const savedFormDetails = typeof window !== "undefined" ? localStorage.getItem("formDetails") : null;
     return savedFormDetails
       ? JSON.parse(savedFormDetails)
       : {
@@ -36,7 +36,9 @@ const CheckoutPage = () => {
     const { name, value } = e.target;
     setFormDetails((prevDetails) => {
       const updatedDetails = { ...prevDetails, [name]: value };
-      localStorage.setItem("formDetails", JSON.stringify(updatedDetails));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("formDetails", JSON.stringify(updatedDetails));
+      }      
       return updatedDetails;
     });
   };
@@ -71,7 +73,7 @@ const CheckoutPage = () => {
     // Navigate to the payment page
     router.push("/payment");
   };
-  
+
   return (
     <div className="p-4 md:p-8">
       <div className="py-12 px-8 bg-purple-50 h-44">

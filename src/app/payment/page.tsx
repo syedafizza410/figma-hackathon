@@ -9,7 +9,7 @@ const PaymentPage = () => {
   const router = useRouter();
 
   const [formDetails, setFormDetails] = useState(() => {
-    const savedFormDetails = localStorage.getItem("formDetails");
+    const savedFormDetails = typeof window !== "undefined" ? localStorage.getItem("formDetails") : null;
     return savedFormDetails ? JSON.parse(savedFormDetails) : null;
   });
 
@@ -23,8 +23,10 @@ const PaymentPage = () => {
     alert("Payment successful!");
 
     // Clear form and cart details
-    localStorage.removeItem("formDetails");
-    localStorage.removeItem("cartDetails");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("formDetails");
+      localStorage.removeItem("cartDetails");
+    }    
     clearCart();
 
     // Redirect to order confirmation or home page
@@ -33,7 +35,7 @@ const PaymentPage = () => {
 
   useEffect(() => {
     // Load cart details from localStorage if needed (e.g., for page refresh scenarios)
-    const savedCart = localStorage.getItem("cartDetails");
+    const savedCart = typeof window !== "undefined" ? localStorage.getItem("cartDetails") : null;
     if (savedCart) {
       const parsedCart = JSON.parse(savedCart);
       parsedCart.forEach((item) => {

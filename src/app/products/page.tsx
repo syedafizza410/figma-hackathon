@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { getProducts } from '../../sanity/lib/api';
 import { urlFor } from '../../sanity/lib/client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function ProductsPage() {
+function ProductsSearch() {
     const [products, setProducts] = useState<any[]>([]);
     const [categories, setCategories] = useState<string[]>(["Chair", "Sofa"]); // Static categories as per schema
     const [filteredCategory, setFilteredCategory] = useState<string | null>(null); // Selected category filter
@@ -57,23 +57,27 @@ export default function ProductsPage() {
 
             {/* Category Filter Buttons */}
             <div className="mb-8 flex space-x-4">
-                <button
-                    onClick={() => setFilteredCategory(null)}
-                    className={`px-4 py-2 rounded ${!filteredCategory ? 'bg-pink-500 text-white' : 'bg-gray-200'}`}
-                >
-                    All
-                </button>
-                {categories.map((category) => (
-                    <button
-                        key={category}
-                        onClick={() => setFilteredCategory(category)}
-                        className={`px-4 py-2 rounded ${
-                            filteredCategory === category ? 'bg-pink-500 text-white' : 'bg-gray-200'
-                        }`}
-                    >
-                        {category}
-                    </button>
-                ))}
+            <button
+          onClick={() => setFilteredCategory(null)}
+          className={`px-4 py-2 rounded ${
+            !filteredCategory ? "bg-pink-500 text-white" : "bg-gray-200"
+          }`}
+        >
+          All
+        </button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setFilteredCategory(category)}
+            className={`px-4 py-2 rounded ${
+              filteredCategory === category
+                ? "bg-pink-500 text-white"
+                : "bg-gray-200"
+            }`}
+          >
+            {category}
+          </button>
+        ))}
             </div>
 
             {/* Product Grid */}
@@ -106,3 +110,11 @@ export default function ProductsPage() {
         </div>
     );
 }
+
+export default function ProductsPage() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductsSearch />
+      </Suspense>
+    );
+  }
