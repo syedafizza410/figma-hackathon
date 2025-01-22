@@ -1,6 +1,77 @@
-import React from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
+import { useCart } from "../../contexts/CartContext";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const CheckoutPage = () => {
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const router = useRouter();
+
+  // Form state initialization
+  const [formDetails, setFormDetails] = useState(() => {
+    const savedFormDetails = localStorage.getItem("formDetails");
+    return savedFormDetails
+      ? JSON.parse(savedFormDetails)
+      : {
+          email: "",
+          firstName: "",
+          lastName: "",
+          address: "",
+          apartment: "",
+          country: "",
+          city: "",
+          postalCode: "",
+        };
+  });
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const calculateTotal = () =>
+    cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormDetails((prevDetails) => {
+      const updatedDetails = { ...prevDetails, [name]: value };
+      localStorage.setItem("formDetails", JSON.stringify(updatedDetails));
+      return updatedDetails;
+    });
+  };
+
+  useEffect(() => {
+    const { email, firstName, lastName, address, apartment, city, country, postalCode } = formDetails;
+    setIsFormValid(
+      !!(email && firstName && lastName && address && apartment && city && country && postalCode)
+    );
+  }, [formDetails]);
+
+  const isProceedEnabled = isFormValid && cart.length > 0;
+
+  const handleProceedToCheckout = () => {
+    // Save form and cart details to localStorage
+    localStorage.setItem("formDetails", JSON.stringify(formDetails));
+    localStorage.setItem("cartDetails", JSON.stringify(cart));
+
+    // Reset form and cart on checkout page
+    setFormDetails({
+      email: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      apartment: "",
+      country: "",
+      city: "",
+      postalCode: "",
+    });
+    clearCart();
+
+    // Navigate to the payment page
+    router.push("/payment");
+  };
+  
   return (
     <div className="p-4 md:p-8">
       <div className="py-12 px-8 bg-purple-50 h-44">
@@ -16,7 +87,7 @@ const CheckoutPage = () => {
               Hekto Demo
             </h1>
             <p className="text-sm text-blue-900 mb-6">
-              Cart Information / Shipping / Payment
+              Cart Information / Shipping <a href="/payment">/ Payment</a>
             </p>
           </div>
 
@@ -28,14 +99,17 @@ const CheckoutPage = () => {
                 </h2>
                 <p className="text-sm text-gray-400">
                   Already have an account?{" "}
-                  <a href="#" className="text-gray-400 underline">
+                  <a href="/login" className="text-gray-400 underline">
                     Log in
                   </a>
                 </p>
               </div>
               <input
                 type="text"
+                name="email"
                 placeholder="Email or mobile phone number"
+                value={formDetails.email}
+                onChange={handleInputChange}
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-indigo-500"
               />
               <div className="flex items-center mt-2">
@@ -60,141 +134,114 @@ const CheckoutPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <input
                   type="text"
-                  placeholder="First name (optional)"
+                  name="firstName"
+                  placeholder="First name"
+                  value={formDetails.firstName}
+                  onChange={handleInputChange}
                   className="p-3 border border-gray-300 rounded-md"
                 />
                 <input
                   type="text"
+                  name="lastName"
                   placeholder="Last name"
+                  value={formDetails.lastName}
+                  onChange={handleInputChange}
                   className="p-3 border border-gray-300 rounded-md"
                 />
               </div>
               <input
                 type="text"
+                name="address"
                 placeholder="Address"
+                value={formDetails.address}
+                onChange={handleInputChange}
                 className="w-full p-3 border border-gray-300 rounded-md mb-4"
               />
               <input
                 type="text"
+                name="apartment"
                 placeholder="Apartment, suite, etc. (optional)"
+                value={formDetails.apartment}
+                onChange={handleInputChange}
                 className="w-full p-3 border border-gray-300 rounded-md mb-4"
               />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <input
                   type="text"
+                  name="city"
                   placeholder="City"
+                  value={formDetails.city}
+                  onChange={handleInputChange}
                   className="p-3 border border-gray-300 rounded-md"
                 />
                 <input
                   type="text"
+                  name="country"
                   placeholder="Bangladesh"
+                  value={formDetails.country}
+                  onChange={handleInputChange}
                   className="p-3 border border-gray-300 rounded-md"
                 />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <input
                   type="text"
+                  name="postalCode"
                   placeholder="Postal Code"
+                  value={formDetails.postalCode}
+                  onChange={handleInputChange}
                   className="p-3 border border-gray-300 rounded-md"
                 />
               </div>
-              <button className="w-full md:w-auto bg-pink-500 text-white px-6 py-2 rounded-md hover:bg-pink-600">
+              <button
+                disabled={!isFormValid}
+                className={`w-full md:w-auto px-6 py-2 rounded-md ${
+                  isFormValid
+                    ? "bg-pink-500 text-white hover:bg-pink-600"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+              >
                 Continue Shipping
               </button>
             </div>
           </div>
         </div>
-
-        <div>
-          <div className="bg-white p-6 rounded-lg shadow-md mb-6 mt-24">
-            <ul className="divide-y divide-gray-200">
-              <li className="flex items-center py-4">
-                <img
-                  src="/cart5.png"
-                  alt="Product 1"
-                  className="w-16 h-16 object-cover rounded-md"
+            
+        <div className="lg:mt-28 bg-white p-6 rounded-lg shadow-md">
+          <ul className="divide-y divide-gray-200">
+            {cart.map((item) => (
+              <li key={item.id} className="flex items-center py-4">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={64}
+                  height={64}
+                  className="object-cover rounded-md"
                 />
                 <div className="ml-4 flex-1">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Ut diam consequat
-                  </p>
-                  <p className="text-xs text-gray-500">Color: Brown</p>
-                  <p className="text-xs text-gray-500">Size: XL</p>
+                  <p className="text-sm font-semibold">{item.name}</p>
+                  <p className="text-sm">Price: ${item.price}</p>
+                  <p className="text-sm">Quantity:</p>
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                    className="w-16 border rounded"
+                  />
                 </div>
-                <p className="text-sm font-semibold text-blue-900">$32.00</p>
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="text-red-500 ml-4"
+                >
+                  Remove
+                </button>
               </li>
-              <li className="flex items-center py-4">
-                <img
-                  src="/Rectangle 144.png"
-                  alt="Product 2"
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <div className="ml-4 flex-1">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Ut diam consequat
-                  </p>
-                  <p className="text-xs text-gray-500">Color: Brown</p>
-                  <p className="text-xs text-gray-500">Size: XL</p>
-                </div>
-                <p className="text-sm font-semibold text-blue-900">$32.00</p>
-              </li>
-              <li className="flex items-center py-4">
-                <img
-                  src="/Rectangle 145.png"
-                  alt="Product 3"
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <div className="ml-4 flex-1">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Ut diam consequat
-                  </p>
-                  <p className="text-xs text-gray-500">Color: Brown</p>
-                  <p className="text-xs text-gray-500">Size: XL</p>
-                </div>
-                <p className="text-sm font-semibold text-blue-900">$32.00</p>
-              </li>
-              <li className="flex items-center py-4">
-                <img
-                  src="/Rectangle 146.png"
-                  alt="Product 4"
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <div className="ml-4 flex-1">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Ut diam consequat
-                  </p>
-                  <p className="text-xs text-gray-500">Color: Brown</p>
-                  <p className="text-xs text-gray-500">Size: XL</p>
-                </div>
-                <p className="text-sm font-semibold text-blue-900">$32.00</p>
-              </li>
-              <li className="flex items-center py-4">
-                <img
-                  src="/Rectangle 147.png"
-                  alt="Product 4"
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <div className="ml-4 flex-1">
-                  <p className="text-sm font-semibold text-gray-700">
-                    Ut diam consequat
-                  </p>
-                  <p className="text-xs text-gray-500">Color: Brown</p>
-                  <p className="text-xs text-gray-500">Size: XL</p>
-                </div>
-                <p className="text-sm font-semibold text-blue-900">$32.00</p>
-              </li>
-            </ul>
+            ))}
+          </ul>
+          <div className="mt-4">
+            <p className="text-blue-900 font-semibold">Total: ${calculateTotal()}</p>
           </div>
-
-          <div className="bg-purple-50 p-6 rounded-lg shadow-md">
-            <div className="flex justify-between mb-2">
-              <p className="text-blue-900">Subtotals:</p>
-              <p className="font-semibold text-blue-900">£219.00</p>
-            </div>
-            <div className="flex justify-between mb-4">
-              <p className="text-blue-900">Totals:</p>
-              <p className="font-semibold text-blue-900">£325.00</p>
-            </div>
             <div className="flex items-center mt-2">
                 <input
                   type="checkbox"
@@ -209,10 +256,16 @@ const CheckoutPage = () => {
                 </label>
               </div>
               <br />
-            <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">
-              Proceed To Checkout
-            </button>
-          </div>
+              <button
+            disabled={!isProceedEnabled}
+            className={`w-full mt-4 py-2 rounded-md ${
+              isFormValid
+                ? "bg-green-500 text-white hover:bg-green-600"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }`}
+          >
+            <Link href={isProceedEnabled ? "/payment" : "#"}>Proceed To Checkout</Link>
+          </button>
         </div>
       </div>
     </div>

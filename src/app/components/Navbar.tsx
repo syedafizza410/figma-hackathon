@@ -8,11 +8,14 @@ import { LuShoppingCart } from "react-icons/lu";
 import { GoPerson } from "react-icons/go";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Import unconditionally
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Search term state
   const homeDropdownRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter(); // Use unconditionally
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,6 +23,13 @@ const Navbar = () => {
 
   const toggleHomeDropdown = () => {
     setIsHomeDropdownOpen(!isHomeDropdownOpen);
+  };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (typeof window !== "undefined" && searchTerm.trim() !== "") {
+      router.push(`/products?search=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   useEffect(() => {
@@ -70,7 +80,7 @@ const Navbar = () => {
                 <span>Log in</span>
               </Link>
               <Link
-                href="/Product"
+                href="/wishlist"
                 className="flex items-center text-white space-x-2"
               >
                 <FaRegHeart />
@@ -92,7 +102,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <h1 className="text-3xl font-serif">
-              <Link href="/HektoDemo">Hekto </Link>
+              <Link href="/HektoDemo">Hekto</Link>
             </h1>
 
             <div className="hidden sm:flex space-x-6">
@@ -130,10 +140,10 @@ const Navbar = () => {
                 Pages
               </Link>
               <Link
-                href="/ProductDetail"
+                href="/products"
                 className="text-gray-900 hover:text-pink-500"
               >
-                Product
+                Products
               </Link>
               <Link href="/Blog" className="text-gray-900 hover:text-pink-500">
                 Blog
@@ -149,15 +159,25 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="hidden sm:flex items-center">
+            {/* Search Bar */}
+            <form
+              onSubmit={handleSearch}
+              className="sm:flex items-center space-x-2"
+            >
               <input
                 type="text"
-                className="border border-gray-300 p-2 text-sm"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search products..."
+                className="border border-gray-300 p-2 text-sm rounded-md lg:w-52 md:44 sm:w-32 w-44 focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
-              <button className="bg-pink-500 text-white p-3">
+              <button
+                type="submit"
+                className="bg-pink-500 text-white p-2 rounded-md hover:bg-pink-600 transition"
+              >
                 <FaSearch />
               </button>
-            </div>
+            </form>
             <button
               className="sm:hidden flex items-left"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -170,7 +190,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
         {isMenuOpen && (
           <div className="sm:hidden flex flex-col px-4 py-2 border-t bg-pink-500">
             <ul className="w-full text-left">

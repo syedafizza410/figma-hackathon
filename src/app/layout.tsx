@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { CartProvider } from "../contexts/CartContext";
+import { WishlistProvider } from "../context/WishlistContext";
 import Navbar from "./components/Navbar"; // Adjust path based on folder structure
 import Footer from "./components/Footer"; // Adjust path based on folder structure
 import "./globals.css";
@@ -19,9 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <WishlistProvider>
+        <CartProvider>
         <Navbar />
-        <main>{children}</main> {/* Content from individual pages */}
-       <Footer /> {/* Footer will render at the bottom */}
+        <main>{children}</main>
+       <Footer />
+       </CartProvider>
+       </WishlistProvider>
       </body>
     </html>
   );

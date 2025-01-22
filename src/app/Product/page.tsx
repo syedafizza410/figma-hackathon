@@ -97,7 +97,7 @@ const Product = () => {
   return (
     <div className="bg-gray-50">
       <div className="bg-white py-6">
-        <div className="bg-purple-50 py-6 px-4 sm:py-8 sm:px-8 h-52">
+      <div className="bg-purple-50 py-6 px-4 sm:py-8 sm:px-8 h-52">
           <div className="max-w-6xl mx-auto mt-10">
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-indigo-900">
               Shop Grid Default
@@ -108,7 +108,6 @@ const Product = () => {
             </p>
           </div>
         </div>
-
         <div className="max-w-6xl mx-auto px-4 mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <div className="mb-4 sm:mb-0">
             <h2 className="text-lg sm:text-xl font-bold text-indigo-900">
