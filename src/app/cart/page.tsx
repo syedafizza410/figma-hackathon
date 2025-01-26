@@ -7,8 +7,10 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<any[]>([]);
 
   useEffect(() => {
-    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartItems(existingCart);
+    if (typeof window !== "undefined") {
+      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartItems(existingCart);
+    }
   }, []);
 
   function handleQuantityChange(index: number, newQty: number) {
@@ -18,14 +20,18 @@ export default function CartPage() {
   }
 
   function handleUpdateCart() {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-    alert("Cart updated!");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      alert("Cart updated!");
+    }
   }
 
   function handleClearCart() {
     setCartItems([]);
-    localStorage.setItem("cart", "[]");
-    alert("Cart cleared!");
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", "[]");
+      alert("Cart cleared!");
+    }
   }
 
   const subTotal = cartItems.reduce(
