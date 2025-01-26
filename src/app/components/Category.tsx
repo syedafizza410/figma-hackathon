@@ -10,11 +10,10 @@ interface Product {
 }
 
 const Category: React.FC = () => {
-  const [categories, setCategories] = useState<string[]>(["Chair", "Sofa"]); // Static categories
+  const [categories, setCategories] = useState<string[]>(["Chair", "Sofa"]); 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
 
-  // Fetch products based on selected category
   useEffect(() => {
     async function fetchProducts() {
       let query = `*[_type == "product"]{

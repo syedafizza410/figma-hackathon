@@ -9,10 +9,10 @@ import { useSearchParams } from 'next/navigation';
 
 function ProductsSearch() {
     const [products, setProducts] = useState<any[]>([]);
-    const [categories, setCategories] = useState<string[]>(["Chair", "Sofa"]); // Static categories as per schema
-    const [filteredCategory, setFilteredCategory] = useState<string | null>(null); // Selected category filter
-    const searchParams = useSearchParams(); // Access search params from the URL
-    const searchQuery = searchParams?.get('search') || ''; // Get the 'search' parameter
+    const [categories, setCategories] = useState<string[]>(["Chair", "Sofa"]); 
+    const [filteredCategory, setFilteredCategory] = useState<string | null>(null); 
+    const searchParams = useSearchParams(); 
+    const searchQuery = searchParams?.get('search') || ''; 
 
    
   useEffect(() => {
@@ -33,7 +33,6 @@ function ProductsSearch() {
 
     return (
         <div className="p-5">
-            {/* Page Header */}
             <div className="bg-purple-50 py-11 px-11 mb-10">
                 <div className="max-w-6xl mx-auto px-4">
                     <h1 className="text-3xl font-bold text-indigo-900">Our Products</h1>
@@ -44,7 +43,6 @@ function ProductsSearch() {
                 </div>
             </div>
 
-            {/* Category Filter Buttons */}
             <div className="mb-8 flex space-x-4">
             <button
           onClick={() => setFilteredCategory(null)}
@@ -69,7 +67,6 @@ function ProductsSearch() {
         ))}
             </div>
 
-            {/* Product Grid */}
             <div className="flex flex-wrap gap-5">
                 {filteredProducts.map((product: any) => (
                     <div

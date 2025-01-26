@@ -16,11 +16,10 @@ const PaymentPage = () => {
     nameOnCard: "",
   });
 
-  const [paymentMethod, setPaymentMethod] = useState("card"); // Default to card
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Retrieve form details and order history from localStorage
     const savedOrderHistory = localStorage.getItem("orderHistory");
     const savedFormDetails = localStorage.getItem("formDetails");
 
@@ -35,13 +34,11 @@ const PaymentPage = () => {
   const validateCard = () => {
     const { cardNumber, expiryDate, cvv, nameOnCard } = cardDetails;
 
-    // Ensure all fields are filled
     if (!cardNumber || !expiryDate || !cvv || !nameOnCard) {
       setError("Please fill all card details.");
       return false;
     }
 
-    // Validate card number for HBL, Meezan, and Alfalah
     const hblPrefixes = [
       "4000", "4001", "4002", "4003", "4004", "4005", "4006", "4007", "4008", "4009",
       "5100", "5200", "5300", "5400", "5500"
@@ -70,7 +67,6 @@ const PaymentPage = () => {
       return false;
     }
 
-    // Clear error if validation passes
     setError("");
     return true;
   };
@@ -79,21 +75,16 @@ const PaymentPage = () => {
     e.preventDefault();
 
     if (paymentMethod === "card") {
-      // Validate card details for card payment
       if (!validateCard()) return;
 
-      // Simulate card payment processing
       alert("Payment Successful via Card!");
     } else {
-      // Simulate COD
       alert("Order placed successfully. Pay on delivery.");
     }
 
-    // Clear form details and order history
     localStorage.removeItem("formDetails");
     localStorage.removeItem("orderHistory");
 
-    // Redirect to order complete page
     router.push("/ordercomplete");
   };
 
@@ -117,7 +108,6 @@ const PaymentPage = () => {
       Payment Page
     </h1>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Payment Form */}
       <form
         onSubmit={handlePayment}
         className="bg-white p-6 rounded-lg shadow-md"
@@ -132,7 +122,6 @@ const PaymentPage = () => {
           </div>
         )}
 
-        {/* Payment Method Selection */}
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Payment Method</label>
           <select
@@ -145,7 +134,6 @@ const PaymentPage = () => {
           </select>
         </div>
 
-        {/* Card Details */}
         {paymentMethod === "card" && (
           <>
             <div className="mb-4">
@@ -224,7 +212,6 @@ const PaymentPage = () => {
         </button>
       </form>
 
-      {/* Order Summary */}
       <div className="bg-purple-50 p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold text-blue-900 mb-4">
           Order Summary

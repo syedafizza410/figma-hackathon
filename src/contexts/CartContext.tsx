@@ -15,14 +15,13 @@ type CartContextType = {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
-  clearCart: () => void; // Add clearCart here
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    // Load the cart from localStorage or initialize it empty
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
       return savedCart ? JSON.parse(savedCart) : [];
@@ -30,7 +29,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return [];
   });
 
-  // Save the cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -48,7 +46,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setCart([
         ...cart,
-        { ...item, price: Number(item.price), quantity: 1 }, // Ensure price is a number
+        { ...item, price: Number(item.price), quantity: 1 }, 
       ]);
     }
   };
@@ -66,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearCart = () => {
-    setCart([]); // Clear the cart
+    setCart([]); 
   };
 
   return (

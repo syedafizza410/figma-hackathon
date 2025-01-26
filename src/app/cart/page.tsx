@@ -6,41 +6,35 @@ import Image from "next/image";
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<any[]>([]);
 
-  // Load cart items from localStorage on mount
   useEffect(() => {
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCartItems(existingCart);
   }, []);
 
-  // Handle changing a product's quantity
   function handleQuantityChange(index: number, newQty: number) {
     const updatedCart = [...cartItems];
     updatedCart[index].quantity = newQty;
     setCartItems(updatedCart);
   }
 
-  // Update localStorage with the latest cart state
   function handleUpdateCart() {
     localStorage.setItem("cart", JSON.stringify(cartItems));
     alert("Cart updated!");
   }
 
-  // Clear entire cart
   function handleClearCart() {
     setCartItems([]);
     localStorage.setItem("cart", "[]");
     alert("Cart cleared!");
   }
 
-  // Compute subtotal
   const subTotal = cartItems.reduce(
-    (acc, item) => acc + (Number(item.price) || 0) * item.quantity, // Ensure price is a number
+    (acc, item) => acc + (Number(item.price) || 0) * item.quantity,
     0
   );
 
   return (
     <div className="min-h-screen bg-gray-50 py-6">
-      {/* Header Section */}
       <div className="w-full bg-gray-100 py-6">
         <div className="max-w-6xl mx-auto px-4">
           <h1 className="text-3xl font-bold text-indigo-900">Shopping Cart</h1>
@@ -50,9 +44,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Product Table */}
         <div className="lg:col-span-2">
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse border border-gray-200 bg-white rounded-lg">
@@ -74,12 +66,10 @@ export default function CartPage() {
               </thead>
               <tbody>
                 {cartItems.map((item, index) => {
-                  // Ensure price is a number
                   const price = Number(item.price) || 0;
                   return (
                     <tr key={item._id}>
                       <td className="border border-gray-200 p-4 flex items-center space-x-4">
-                        {/* Product Image */}
                         <div className="flex-shrink-0">
                           <Image
                             src={item.image}
@@ -119,7 +109,6 @@ export default function CartPage() {
             </table>
           </div>
 
-          {/* Action Buttons */}
           <div className="mt-4 flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
             <button
               className="px-4 py-2 bg-pink-500 text-white font-medium rounded-md hover:bg-pink-600 transition duration-200"
@@ -136,9 +125,7 @@ export default function CartPage() {
           </div>
         </div>
 
-        {/* Sidebar */}
         <div className="space-y-8">
-          {/* Cart Totals */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-lg font-semibold text-gray-800">Cart Totals</h2>
             <div className="mt-4">
@@ -159,7 +146,6 @@ export default function CartPage() {
             </div>
           </div>
 
-          {/* Calculate Shipping */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-lg font-semibold text-gray-800">
               Calculate Shipping

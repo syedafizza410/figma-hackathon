@@ -1,15 +1,13 @@
-"use client"; // <-- This makes it a Client Component
+"use client"; 
 
 import React from "react";
 
 export default function AddToCartButton({ product }: { product: any }) {
   const handleAddToCart = () => {
-    if (typeof window === "undefined") return; // Safety check
+    if (typeof window === "undefined") return; 
 
-    // Retrieve existing cart from localStorage or create an empty array
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    // Check if this product is already in the cart
     const index = existingCart.findIndex((item: any) => item._id === product._id);
 
     if (index >= 0) {
@@ -24,7 +22,6 @@ export default function AddToCartButton({ product }: { product: any }) {
       });
     }
 
-    // Save updated cart back to localStorage
     localStorage.setItem("cart", JSON.stringify(existingCart));
 
     alert(`${product.name} has been added to the cart!`);

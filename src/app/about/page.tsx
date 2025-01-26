@@ -29,7 +29,6 @@ const About = () => {
 
   return (
     <div className="bg-gray-50 py-10">
-      {/* Header Section */}
       <div className="py-12 px-8 bg-purple-50 h-44">
         <h1 className="max-w-6xl mx-auto text-4xl font-bold text-blue-900">
           About Us
@@ -43,7 +42,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Business Info Section */}
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-6 items-center py-12">
         <div>
           <img
@@ -67,7 +65,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Features Section */}
       <div className="py-12 bg-white">
         <h2 className="text-center text-3xl font-bold text-gray-800">
           Our Features
@@ -114,7 +111,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Testimonials Section */}
       <div className="py-12 bg-gray-50">
         <h2 className="text-center text-3xl font-bold text-gray-800">
           Our Client Say!

@@ -6,7 +6,6 @@ import Image from "next/image";
 const OrderCompleted = () => {
   return (
     <div className="bg-gray-50 py-10">
-      {/* Header Section */}
       <div className="py-12 px-8 bg-blue-50 h-44">
         <h1 className="max-w-6xl mx-auto text-4xl font-bold text-blue-900">
           Order Completed
@@ -20,30 +19,25 @@ const OrderCompleted = () => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="relative py-16">
-        {/* Left Icon (Clock) */}
         <div className="absolute top-1/2 left-12 transform -translate-y-1/2 flex flex-col items-center">
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
             <img src="/clock 1.png" alt="Clock Icon" className="w-8 h-8" />
           </div>
         </div>
 
-        {/* Center Icon (Check) */}
         <div className="absolute left-1/2 top-32 transform -translate-x-1/2 -translate-y-1/2">
           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md">
             <img src="/Vector 15.png" alt="Check Icon" className="w-10 h-10" />
           </div>
         </div>
 
-        {/* Right Icon (Checklist) */}
         <div className="absolute bottom-12 right-12 flex flex-col items-center">
           <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center">
             <img src="/checklist 1.png" alt="Clipboard Icon" className="w-8 h-8" />
           </div>
         </div>
 
-        {/* Order Message */}
         <div className="flex flex-col items-center mt-12 text-center">
           <h2 className="text-2xl font-bold text-gray-800">
             Your Order Is Completed!
@@ -61,7 +55,6 @@ const OrderCompleted = () => {
         </div>
       </div>
 
-      {/* Brand Logos Section */}
       <div className="py-8 flex justify-center items-center mt-7 mb-12">
         <div className="flex flex-wrap justify-center sm:justify-between items-center sm:gap-6 md:gap-8 w-full max-w-6xl px-4 mt-32">
           <Image
