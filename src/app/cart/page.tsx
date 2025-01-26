@@ -141,7 +141,9 @@ export default function CartPage() {
                 Shipping &amp; taxes calculated at checkout
               </p>
               <button className="mt-4 w-full bg-green-500 text-white font-medium py-2 rounded-md hover:bg-green-600 transition duration-200">
+                <a href="/payment">
                 Proceed To Checkout
+                </a>
               </button>
             </div>
           </div>
