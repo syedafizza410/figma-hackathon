@@ -20,12 +20,13 @@ const PaymentPage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const savedOrderHistory = localStorage.getItem("orderHistory");
-    const savedFormDetails = localStorage.getItem("formDetails");
-
-    if (savedOrderHistory) setOrderHistory(JSON.parse(savedOrderHistory));
-    if (savedFormDetails) setFormDetails(JSON.parse(savedFormDetails));
-  }, []);
+    if (typeof window !== "undefined") {
+      const savedOrderHistory = localStorage.getItem("orderHistory");
+      const savedFormDetails = localStorage.getItem("formDetails");
+      if (savedOrderHistory) setOrderHistory(JSON.parse(savedOrderHistory));
+      if (savedFormDetails) setFormDetails(JSON.parse(savedFormDetails));
+    }
+  }, []);  
 
   const calculateTotal = () =>
     orderHistory.reduce((total, item) => total + item.price * item.quantity, 0);
