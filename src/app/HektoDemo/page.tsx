@@ -38,8 +38,10 @@ const CheckoutPage = () => {
   }, [formDetails]);
 
   const handleProceedToCheckout = () => {
-    localStorage.setItem("formDetails", JSON.stringify(formDetails));
-    localStorage.setItem("orderHistory", JSON.stringify(cart));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("formDetails", JSON.stringify(formDetails));
+      localStorage.setItem("orderHistory", JSON.stringify(cart));
+    }
     clearCart();
     router.push("/payment");
   };

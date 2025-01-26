@@ -82,8 +82,10 @@ const PaymentPage = () => {
       alert("Order placed successfully. Pay on delivery.");
     }
 
-    localStorage.removeItem("formDetails");
-    localStorage.removeItem("orderHistory");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("formDetails");
+      localStorage.removeItem("orderHistory");
+    }
 
     router.push("/ordercomplete");
   };
