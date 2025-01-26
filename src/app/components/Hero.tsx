@@ -35,7 +35,7 @@ const HeroSection = () => {
                 <br /> adipiscing in phasellus non in justo.
               </p>
             <button className="bg-pink-500 text-white py-3 px-6 rounded-md shadow-md text-sm hover:bg-pink-600 transition mt-4">
-            <a href='/cart'>Shop Now</a> 
+            <a href='/products'>Shop Now</a> 
             </button>
             </div>
 

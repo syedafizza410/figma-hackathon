@@ -1,30 +1,23 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const CheckoutPage = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const router = useRouter();
 
-  // Form state initialization
-  const [formDetails, setFormDetails] = useState(() => {
-    if (typeof window === "undefined") return null;
-    const savedFormDetails = localStorage.getItem("formDetails");
-    return savedFormDetails
-      ? JSON.parse(savedFormDetails)
-      : {
-          email: "",
-          firstName: "",
-          lastName: "",
-          address: "",
-          apartment: "",
-          country: "",
-          city: "",
-          postalCode: "",
-        };
+  const [formDetails, setFormDetails] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    country: "",
+    postalCode: "",
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -32,44 +25,24 @@ const CheckoutPage = () => {
   const calculateTotal = () =>
     cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormDetails((prevDetails) => {
-      const updatedDetails = { ...prevDetails, [name]: value };
-      if (typeof window !== "undefined") {
-        localStorage.setItem("formDetails", JSON.stringify(updatedDetails));
-      }      
-      return updatedDetails;
-    });
+    setFormDetails({ ...formDetails, [name]: value });
   };
 
   useEffect(() => {
-    const { email, firstName, lastName, address, apartment, city, country, postalCode } = formDetails;
+    const { email, firstName, lastName, address, city, country, postalCode } = formDetails;
     setIsFormValid(
-      !!(email && firstName && lastName && address && apartment && city && country && postalCode)
+      !!(email && firstName && lastName && address && city && country && postalCode)
     );
   }, [formDetails]);
 
-  const isProceedEnabled = isFormValid && cart.length > 0;
-
   const handleProceedToCheckout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("formDetails", JSON.stringify(formDetails));
-      localStorage.setItem("cartDetails", JSON.stringify(cart));
-    }
+    localStorage.setItem("formDetails", JSON.stringify(formDetails));
+    localStorage.setItem("orderHistory", JSON.stringify(cart));
     clearCart();
     router.push("/payment");
   };
-
-  if (!formDetails) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <p className="text-center text-red-500">
-          Loading form details. Please wait...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="p-4 md:p-8">

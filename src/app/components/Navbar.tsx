@@ -8,14 +8,14 @@ import { LuShoppingCart } from "react-icons/lu";
 import { GoPerson } from "react-icons/go";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Import unconditionally
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // Search term state
+  const [searchTerm, setSearchTerm] = useState("");
   const homeDropdownRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter(); // Use unconditionally
+  const router = useRouter(); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -159,7 +159,6 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Search Bar */}
             <form
               onSubmit={handleSearch}
               className="sm:flex items-center space-x-2"
