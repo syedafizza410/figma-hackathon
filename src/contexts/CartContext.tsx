@@ -22,7 +22,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-    
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
@@ -31,7 +31,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }, []);
-  
+
 
     useEffect(() => {
       if (typeof window !== "undefined") {

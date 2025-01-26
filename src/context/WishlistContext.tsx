@@ -11,9 +11,7 @@ type WishlistContextType = {
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider = ({ children }: { children: ReactNode }) => {
-  const [wishlist, setWishlist] = useState<any[]>(
-    () => JSON.parse(localStorage.getItem("wishlist") || "[]")
-  );
+  const [wishlist, setWishlist] = useState<any[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -32,12 +30,12 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
   const addToWishlist = (product: any) => {
     if (!wishlist.find((item) => item._id === product._id)) {
-      setWishlist([...wishlist, product]);
+      setWishlist((prev) => [...prev, product]);
     }
   };
 
   const removeFromWishlist = (id: string) => {
-    setWishlist(wishlist.filter((item) => item._id !== id));
+    setWishlist((prev) => prev.filter((item) => item._id !== id));
   };
 
   return (
