@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 type CartItem = {
   id: string;
@@ -22,6 +23,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,10 +36,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 
     useEffect(() => {
-      if (typeof window !== "undefined") {
+      if (typeof window !== "undefined" && cart.length > 0) {
         localStorage.setItem("cart", JSON.stringify(cart));
       }
     }, [cart]);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const shouldClearCart = sessionStorage.getItem("clearCart");
+  
+        if (shouldClearCart === "true") {
+          sessionStorage.removeItem("clearCart"); // Reset the flag
+          setCart([]);
+          localStorage.removeItem("cart"); // Remove cart from storage
+        }
+      }
+    }, [pathname]);
 
   const addToCart = (item: CartItem) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
@@ -55,6 +69,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         { ...item, price: Number(item.price), quantity: 1 }, 
       ]);
     }
+
+    alert(`${item.name} has been added to your cart`)
   };
 
   const removeFromCart = (id: string) => {
@@ -70,7 +86,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearCart = () => {
+    sessionStorage.setItem("clearCart", "true"); // ✅ Mark cart for clearing on navigation
     setCart([]); 
+    localStorage.removeItem("cart");
   };
 
   return (

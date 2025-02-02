@@ -240,6 +240,19 @@ const PaymentPage = () => {
             <span>${calculateTotal().toFixed(2)}</span>
           </p>
         </div>
+
+        <h2 className="text-xl font-semibold text-blue-900 mt-6">
+            Shipping Details
+          </h2>
+          <div className="mt-4 text-gray-700">
+            <p><strong>Name:</strong> {formDetails.firstName} {formDetails.lastName}</p>
+            <br />
+            <p><strong>Email:</strong> {formDetails.email}</p>
+            <br />
+            <p><strong>Address:</strong> {formDetails.address}, {formDetails.city}, {formDetails.country}</p>
+            <br />
+            <p><strong>Postal Code:</strong> {formDetails.postalCode}</p>
+          </div>
       </div>
     </div>
   </div>

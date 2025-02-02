@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
 
 const shoplist = [
@@ -166,7 +163,14 @@ const ShopList = () => {
 
               <div className="lg:w-2/3 lg:ml-6 mt-4 lg:mt-0">
                 <div className="w-full flex justify-between items-center">
-                  <h3 className="text-xl font-semibold">{product.name}</h3>
+                  <h3 className="text-xl font-semibold">
+                    <Link
+                      href={`/Shoplist/${product.id}`}
+                      className="text-blue-900 hover:underline"
+                    >
+                      {product.name}
+                    </Link>
+                  </h3>
                   <div className="mt-2 flex gap-2">
                     {product.colors.map((color, index) => (
                       <span

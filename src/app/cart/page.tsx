@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -17,6 +19,7 @@ export default function CartPage() {
     const updatedCart = [...cartItems];
     updatedCart[index].quantity = newQty;
     setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart))
   }
 
   function handleUpdateCart() {
@@ -32,6 +35,13 @@ export default function CartPage() {
       localStorage.setItem("cart", "[]");
       alert("Cart cleared!");
     }
+  }
+
+  function handleProceedToCheckout() {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cartItems)); 
+    }
+    router.push("/HektoDemo"); 
   }
 
   const subTotal = cartItems.reduce(
@@ -146,10 +156,11 @@ export default function CartPage() {
               <p className="text-sm text-gray-500 mt-2">
                 Shipping &amp; taxes calculated at checkout
               </p>
-              <button className="mt-4 w-full bg-green-500 text-white font-medium py-2 rounded-md hover:bg-green-600 transition duration-200">
-                <a href="/payment">
+              <button
+                onClick={handleProceedToCheckout}
+                className="mt-4 w-full bg-green-500 text-white font-medium py-2 rounded-md hover:bg-green-600 transition duration-200"
+              >
                 Proceed To Checkout
-                </a>
               </button>
             </div>
           </div>
