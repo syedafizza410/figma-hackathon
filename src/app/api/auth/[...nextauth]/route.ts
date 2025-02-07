@@ -1,7 +1,20 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions = {
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+    };
+  }
+  interface User {
+    id: string;
+    email: string;
+  }
+}
+
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Admin Login",
@@ -16,21 +29,32 @@ export const authOptions = {
           credentials?.email === adminUser.email &&
           credentials?.password === adminUser.password
         ) {
-          return { id: adminUser.id, email: adminUser.email };
+          return adminUser;
         }
-        return null; 
+        return null;
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET, 
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/login", 
+    signIn: "/login",
   },
   callbacks: {
     async session({ session, token }) {
-      session.user.id = token.sub;
+      if (token.id) {
+        session.user.id = token.id as string; 
+      }
       return session;
     },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id as string;
+      }
+      return token;
+    },
+  },
+  session: {
+    strategy: "jwt",
   },
 };
 
