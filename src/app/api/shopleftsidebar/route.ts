@@ -1,96 +1,132 @@
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
-let shopLeftSidebarProducts = [
-    {
-        id: 1,
-        name: "Dictum Morbi",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop1.png",
-        rating: 4,
-      },
-      {
-        id: 2,
-        name: "Sodales Sit",
-        description: "Magna in est adipiscing in phasellus non in justo.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop2.png",
-        rating: 4,
-      },
-      {
-        id: 3,
-        name: "Nibh Varius",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop3.png",
-        rating: 4,
-      },
-      {
-        id: 4,
-        name: "Mauris Quis",
-        description: "Magna in est adipiscing in phasellus non in justo.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop4.png",
-        rating: 4,
-      },
-      {
-        id: 5,
-        name: "Marbi sagittis",
-        description: "Magna in est adipiscing in phasellus non in justo.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop5.png",
-        rating: 4,
-      },
-      {
-        id: 6,
-        name: "Ultricies venenatis",
-        description: "Magna in est adipiscing in phasellus non in justo.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/shop6.png",
-        rating: 4,
-      },
-      {
-        id: 7,
-        name: "Scelerisque dignissim",
-        description: "Magna in est adipiscing in phasellus non in justo.",
-        price: 26.0,
-        oldPrice: 52.0,
-        image: "/Shop7.png",
-        rating: 4,
-      },
-];
+const filePath = path.join(process.cwd(), "public", "shopLeftSidebarProducts.json");
 
+const ShopLeftsidebarProducts = [
+  {
+    id: 1,
+    name: "Dictum Morbi",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop1.png",
+    rating: 4,
+  },
+  {
+    id: 2,
+    name: "Sodales Sit",
+    description: "Magna in est adipiscing in phasellus non in justo.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop2.png",
+    rating: 4,
+  },
+  {
+    id: 3,
+    name: "Nibh Varius",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop3.png",
+    rating: 4,
+  },
+  {
+    id: 4,
+    name: "Mauris Quis",
+    description: "Magna in est adipiscing in phasellus non in justo.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop4.png",
+    rating: 4,
+  },
+  {
+    id: 5,
+    name: "Marbi sagittis",
+    description: "Magna in est adipiscing in phasellus non in justo.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop5.png",
+    rating: 4,
+  },
+  {
+    id: 6,
+    name: "Ultricies venenatis",
+    description: "Magna in est adipiscing in phasellus non in justo.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/shop6.png",
+    rating: 4,
+  },
+  {
+    id: 7,
+    name: "Scelerisque dignissim",
+    description: "Magna in est adipiscing in phasellus non in justo.",
+    price: 26.0,
+    oldPrice: 52.0,
+    image: "/Shop7.png",
+    rating: 4,
+  },
+ ];
+
+// ✅ Read Products from JSON File
+const readProducts = () => {
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const storedProducts = JSON.parse(data);
+
+    // 🟢 Merge default products only if they don't exist in the file
+    const mergedProducts = [...ShopLeftsidebarProducts, ...storedProducts.filter(p => !ShopLeftsidebarProducts.some(dp => dp.id === p.id))];
+    return mergedProducts;
+  } catch (error) {
+    return ShopLeftsidebarProducts;
+  }
+};
+
+// ✅ Write Products to JSON File
+const writeProducts = (products) => {
+  fs.writeFileSync(filePath, JSON.stringify(products, null, 2), "utf8");
+};
+
+// ✅ **GET - Fetch Sidebar Products**
 export async function GET() {
-  const storedProducts = localStorage.getItem("shopLeftSidebarProducts");
-  shopLeftSidebarProducts = storedProducts ? JSON.parse(storedProducts) : shopLeftSidebarProducts;
-  return NextResponse.json(shopLeftSidebarProducts);
+  const products = readProducts();
+  return NextResponse.json(products);
 }
 
+// ✅ **POST - Add New Product**
 export async function POST(req: Request) {
   const newProduct = await req.json();
-  shopLeftSidebarProducts.push(newProduct);
+  const products = readProducts();
 
-  localStorage.setItem("shopLeftSidebarProducts", JSON.stringify(shopLeftSidebarProducts));
+  newProduct.id = products.length + 1;
+  products.push(newProduct);
+  writeProducts(products);
 
-  return NextResponse.json({ success: true, products: shopLeftSidebarProducts });
+  return NextResponse.json({ success: true, products });
 }
 
+// ✅ **PUT - Edit Product**
 export async function PUT(req: Request) {
   const updatedProduct = await req.json();
-  shopLeftSidebarProducts = shopLeftSidebarProducts.map((product) =>
+  let products = readProducts();
+
+  products = products.map((product) =>
     product.id === updatedProduct.id ? updatedProduct : product
   );
-  return NextResponse.json({ success: true, products: shopLeftSidebarProducts });
+
+  writeProducts(products);
+  return NextResponse.json({ success: true, products });
 }
 
+// ✅ **DELETE - Remove Product**
 export async function DELETE(req: Request) {
   const { id } = await req.json();
-  shopLeftSidebarProducts = shopLeftSidebarProducts.filter((p) => p.id !== id);
-  return NextResponse.json({ success: true, products: shopLeftSidebarProducts });
+  let products = readProducts();
+
+  products = products.filter((p) => p.id !== id);
+  writeProducts(products);
+
+  return NextResponse.json({ success: true, products });
 }
