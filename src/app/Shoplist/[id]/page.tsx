@@ -84,7 +84,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const { addToWishlist } = useWishlist();
   const { addToCart } = useCart();
-  const product = shoplist.find((p) => p.id === Number(id)); // Find product by ID
+  const product = shoplist.find((p) => p.id === Number(id)); 
 
   if (!product) {
     return <div className="text-center text-red-500 text-lg mt-10">Product not found!</div>;
@@ -138,7 +138,7 @@ export default function ProductDetail() {
             <button
   className="text-blue-900 hover:text-indigo-900 shadow-lg"
   aria-label="Add to Cart"
-  onClick={() => addToCart({ ...product, id: product.id.toString(), quantity: 1 })} // Convert id to string
+  onClick={() => addToCart({ ...product, id: product.id.toString(), quantity: 1 })} 
 >
   <AiOutlineShoppingCart size={24} />
 </button>

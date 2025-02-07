@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 function TopCategories() {
   const categories = [
@@ -29,7 +30,9 @@ function TopCategories() {
               <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-[#3F509E] transition-all duration-300"></div>
 
               <button className="absolute bottom-2 bg-[#08D15F] text-white px-3 py-1 text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Link href="/products">
                 View Shop
+                </Link>
               </button>
             </div>
 

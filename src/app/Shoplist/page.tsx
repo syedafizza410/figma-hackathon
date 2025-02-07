@@ -121,11 +121,9 @@ const ShopList = () => {
                   <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
                     <AiOutlineShoppingCart size={24} />
                   </button>
-                  <Link href="/cart">
                     <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
                       <AiOutlineHeart size={24} />
                     </button>
-                  </Link>
                   <button className="flex items-center justify-center w-10 h-10 rounded-full shadow-lg">
                     <FaSearch size={24} />
                   </button>

@@ -414,12 +414,18 @@ const ShopLeftSidebar = () => {
             {products.map((product) => (
               <div key={product.id} className="flex flex-col sm:flex-row items-center border p-4 bg-white rounded-lg shadow-md">
                 <div className="w-full sm:w-1/3 h-40 relative">
+                  <Link href={`/Shop/${product.id}`}>
                   <Image src={product.image} alt={product.name} width={100} height={100} className="rounded-md object-cover w-full h-full" />
+                  </Link>
                 </div>
 
                 <div className="mt-4 sm:mt-0 sm:ml-4 flex-1">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold">{product.name}</h3>
+                    <h3 className="text-lg font-bold text-blue-900">
+                      <Link href={`/Shop/${product.id}`}>
+                      {product.name}
+                      </Link>
+                      </h3>
                     <div className="flex space-x-2">
                       {product.colors?.map((color, index) => (
                         <span key={index} className={`w-3 h-3 ${color} rounded-full`}></span>
