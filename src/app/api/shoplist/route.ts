@@ -77,13 +77,11 @@ let shopListProducts = [
 },
 ];
 
-// ✅ Read Products from JSON File
 const readProducts = () => {
   try {
     const data = fs.readFileSync(filePath, "utf8");
     const storedProducts = JSON.parse(data);
 
-    // 🟢 Merge default products only if they don't exist in the file
     const mergedProducts = [...shopListProducts, ...storedProducts.filter(p => !shopListProducts.some(dp => dp.id === p.id))];
     return mergedProducts;
   } catch (error) {
@@ -91,18 +89,15 @@ const readProducts = () => {
   }
 };
 
-// ✅ Write Products to JSON File
 const writeProducts = (products) => {
   fs.writeFileSync(filePath, JSON.stringify(products, null, 2), "utf8");
 };
 
-// ✅ **GET - Fetch Shop List Products**
 export async function GET() {
   const products = readProducts();
   return NextResponse.json(products);
 }
 
-// ✅ **POST - Add New Product**
 export async function POST(req: Request) {
   const newProduct = await req.json();
   const products = readProducts();
@@ -114,7 +109,6 @@ export async function POST(req: Request) {
   return NextResponse.json({ success: true, products });
 }
 
-// ✅ **PUT - Edit Product**
 export async function PUT(req: Request) {
   const updatedProduct = await req.json();
   let products = readProducts();
@@ -127,7 +121,6 @@ export async function PUT(req: Request) {
   return NextResponse.json({ success: true, products });
 }
 
-// ✅ **DELETE - Remove Product**
 export async function DELETE(req: Request) {
   const { id } = await req.json();
   let products = readProducts();
