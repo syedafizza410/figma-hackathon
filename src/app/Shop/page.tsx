@@ -1,100 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
 
-
-export default function Home() {
+const ShopLeftSidebar = () => {
   const [perPage, setPerPage] = useState<number>(10);
   const [sortBy, setSortBy] = useState<string>("bestMatch");
   const [view, setView] = useState<string>("grid");
+  const [products, setProducts] = useState([]);
 
-  const products = [
-    {
-      id: 1,
-      name: "Dictum Morbi",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop1.png",
-      rating: 4,
-    },
-    {
-      id: 2,
-      name: "Sodales Sit",
-      description: "Magna in est adipiscing in phasellus non in justo.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop2.png",
-      rating: 4,
-    },
-    {
-      id: 3,
-      name: "Nibh Varius",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop3.png",
-      rating: 4,
-    },
-    {
-      id: 4,
-      name: "Mauris Quis",
-      description: "Magna in est adipiscing in phasellus non in justo.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop4.png",
-      rating: 4,
-    },
-    {
-      id: 5,
-      name: "Marbi sagittis",
-      description: "Magna in est adipiscing in phasellus non in justo.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop5.png",
-      rating: 4,
-    },
-    {
-      id: 6,
-      name: "Ultricies venenatis",
-      description: "Magna in est adipiscing in phasellus non in justo.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/shop6.png",
-      rating: 4,
-    },
-    {
-      id: 7,
-      name: "Scelerisque dignissim",
-      description: "Magna in est adipiscing in phasellus non in justo.",
-      price: 26.0,
-      oldPrice: 52.0,
-      image: "/Shop7.png",
-      rating: 4,
-    },
-  ];
-
-  const sortedProducts = [...products].sort((a, b) => {
-    if (sortBy === "lowToHigh") return a.price - b.price;
-    if (sortBy === "highToLow") return b.price - a.price;
-    return 0;
-  });
-
-  const displayedProducts = sortedProducts.slice(0, perPage);
+  useEffect(() => {
+    fetch("/api/shopleftsidebar")
+      .then((res) => res.json())
+      .then(setProducts)
+      .catch((err) => console.error("Error fetching Shop Left Sidebar:", err));
+  }, []);
 
   return (
     <div className="bg-white py-6">
       <div className="bg-purple-50 py-11 px-11">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-indigo-900">
-            Shop Left Sidebar
-          </h1>
+          <h1 className="text-3xl font-bold text-indigo-900">Shop Left Sidebar</h1>
           <p className="text-sm text-gray-600">
             <Link href={"/"}>Home</Link> . Pages .{" "}
             <span className="text-pink-500">Shop Left Sidebar</span>
@@ -482,85 +410,44 @@ export default function Home() {
           </div>
         </aside>
         <main className="w-full md:w-3/4 p-4">
-          <div
-            className={`${
-              view === "grid"
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6"
-                : "flex flex-col space-y-4"
-            }`}
-          >
-            {displayedProducts.map((product) => (
-              <div
-                key={product.id}
-                className="flex flex-col sm:flex-row items-center border p-4 bg-white rounded-lg shadow-md"
-              >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            {products.map((product) => (
+              <div key={product.id} className="flex flex-col sm:flex-row items-center border p-4 bg-white rounded-lg shadow-md">
                 <div className="w-full sm:w-1/3 h-40 relative">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-md"
-                  />
+                  <Image src={product.image} alt={product.name} width={100} height={100} className="rounded-md object-cover w-full h-full" />
                 </div>
 
                 <div className="mt-4 sm:mt-0 sm:ml-4 flex-1">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-bold">{product.name}</h3>
                     <div className="flex space-x-2">
-                      <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-                      <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                      <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+                      {product.colors?.map((color, index) => (
+                        <span key={index} className={`w-3 h-3 ${color} rounded-full`}></span>
+                      ))}
                     </div>
                   </div>
 
                   <div className="flex items-center mt-1">
-                    {Array(5)
-                      .fill(0)
-                      .map((_, index) => (
-                        <span
-                          key={index}
-                          className={`${
-                            index < product.rating
-                              ? "text-yellow-500"
-                              : "text-gray-300"
-                          } text-lg`}
-                        >
-                          ★
-                        </span>
-                      ))}
+                    {Array(5).fill(0).map((_, index) => (
+                      <span key={index} className={`${index < product.rating ? "text-yellow-500" : "text-gray-300"} text-lg`}>★</span>
+                    ))}
                   </div>
 
-                  <p className="text-sm text-gray-600 mt-2">
-                    {product.description}
-                  </p>
+                  <p className="text-sm text-gray-600 mt-2">{product.description}</p>
 
                   <div className="mt-2">
-                    <span className="text-lg font-bold text-blue-900">
-                      ${product.price.toFixed(2)}
-                    </span>
-                    <span className="ml-2 line-through text-pink-500">
-                      ${product.oldPrice.toFixed(2)}
-                    </span>
+                    <span className="text-lg font-bold text-blue-900">${product.price.toFixed(2)}</span>
+                    <span className="ml-2 line-through text-pink-500">${product.oldPrice.toFixed(2)}</span>
                   </div>
 
                   <div className="mt-2 flex space-x-4">
-                    <button
-                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
-                      aria-label="Add to Wishlist"
-                    >
-                    <AiOutlineShoppingCart size={24} />
+                    <button className="text-blue-900 hover:text-indigo-900 shadow-lg" aria-label="Add to Wishlist">
+                      <AiOutlineShoppingCart size={24} />
                     </button>
-                    <button
-                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
-                      aria-label="View Details"
-                    >
+                    <button className="text-blue-900 hover:text-indigo-900 shadow-lg" aria-label="View Details">
                       <AiOutlineHeart size={24} />
                     </button>
-                    <button
-                      className="text-blue-900 hover:text-indigo-900 shadow-lg"
-                      aria-label="Add to Cart"
-                    >
+                    <button className="text-blue-900 hover:text-indigo-900 shadow-lg" aria-label="Add to Cart">
                       <FaSearch size={24} />
                     </button>
                   </div>
@@ -570,45 +457,18 @@ export default function Home() {
           </div>
         </main>
       </div>
+
       <div className="py-8 flex justify-center items-center mt-7 mb-12">
         <div className="flex flex-wrap justify-center sm:justify-between items-center sm:gap-6 md:gap-8 w-full max-w-6xl px-4">
-          <Image
-            src="/text1.png"
-            alt="Partner 1"
-            width={100}
-            height={10}
-            className="sm:h-10 md:h-12"
-          />
-          <Image
-            src="/text2.png"
-            alt="Partner 2"
-            width={100}
-            height={10}
-            className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300"
-          />
-          <Image
-            src="/text3.png"
-            alt="Partner 3"
-            height={10}
-            width={100}
-            className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300"
-          />
-          <Image
-            src="/text4.png"
-            alt="Partner 4"
-            height={10}
-            width={100}
-            className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300"
-          />
-          <Image
-            src="/text5.png"
-            alt="Partner 5"
-            width={100}
-            height={10}
-            className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300"
-          />
+          <Image src="/text1.png" alt="Partner 1" width={100} height={10} className="sm:h-10 md:h-12" />
+          <Image src="/text2.png" alt="Partner 2" width={100} height={10} className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300" />
+          <Image src="/text3.png" alt="Partner 3" height={10} width={100} className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300" />
+          <Image src="/text4.png" alt="Partner 4" height={10} width={100} className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300" />
+          <Image src="/text5.png" alt="Partner 5" width={100} height={10} className="sm:h-10 md:h-12 grayscale hover:grayscale-0 transition duration-300" />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ShopLeftSidebar;

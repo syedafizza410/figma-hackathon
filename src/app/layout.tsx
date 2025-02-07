@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { CartProvider } from "../contexts/CartContext";
-import { WishlistProvider } from "../context/WishlistContext";
-import Navbar from "./components/Navbar"; // Adjust path based on folder structure
-import Footer from "./components/Footer"; // Adjust path based on folder structure
+import LayoutClientWrapper from "./LayoutClientWrapper"; // Import the wrapper component
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,19 +12,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
+      <head>
+      </head>
       <body className={inter.className}>
-      <WishlistProvider>
-        <CartProvider>
-        <Navbar />
-        <main>{children}</main>
-       <Footer />
-       </CartProvider>
-       </WishlistProvider>
+        <LayoutClientWrapper>{children}</LayoutClientWrapper>
       </body>
     </html>
   );

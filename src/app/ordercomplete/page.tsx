@@ -2,8 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const OrderCompleted = () => {
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const savedOrderDetails = localStorage.getItem("orderDetails");
+    const savedEmail = localStorage.getItem("userEmail");
+    if (savedOrderDetails) setOrderDetails(JSON.parse(savedOrderDetails));
+    if (savedEmail) setEmail(savedEmail);
+  }, []);
+
   return (
     <div className="bg-gray-50 py-10">
       <div className="py-12 px-8 bg-blue-50 h-44">
@@ -38,15 +49,31 @@ const OrderCompleted = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center mt-12 text-center">
+        <div className="flex flex-col items-center mt-32 text-center">
           <h2 className="text-2xl font-bold text-gray-800">
             Your Order Is Completed!
           </h2>
           <p className="text-gray-600 mt-4 max-w-lg text-center mx-auto">
             Thank you for your order! Your order is being processed and will be
-            completed within 3-6 hours. You will receive an email confirmation when
-            your order is completed.
+            completed within 3-6 hours. You will receive an email confirmation at{" "}
+            <span className="font-bold text-blue-900">{email || "your email"}</span>.
           </p>
+          {orderDetails && (
+            <div className="mt-6 bg-gray-100 p-4 rounded-lg shadow-md text-left">
+              <h3 className="text-lg font-bold text-gray-700">Order Summary</h3>
+              <ul className="mt-4">
+                {orderDetails.map((item, index) => (
+                  <li key={index} className="flex justify-between text-gray-600">
+                    <span>{item.name}</span>
+                    <span>${item.price.toFixed(2)} x {item.quantity}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-gray-800 font-bold">
+                Total: ${orderDetails.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+              </p>
+            </div>
+          )}
           <Link href="/">
             <button className="mt-6 bg-[#FB2E86] text-white px-6 py-3 rounded-md shadow-md hover:bg-pink-600">
               Continue Shopping

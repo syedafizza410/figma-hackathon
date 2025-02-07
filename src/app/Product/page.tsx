@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
 
 const Product = () => {
   const [perPage, setPerPage] = useState(10); 
