@@ -106,9 +106,9 @@ export default function ManageProducts() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <AdminSidebar />
-      <div className="p-6 flex-grow">
+      <div className="p-6 flex-grow w-full space-y-8">
         <h1 className="text-2xl font-bold mb-4">Manage Products</h1>
 
         <section className="mb-8">
@@ -147,7 +147,7 @@ export default function ManageProducts() {
 
 function ProductTable({ products, handleDelete, handleEdit, section }) {
   return (
-    <table className="w-full border-collapse border border-gray-300">
+    <table className="w-full border-collapse border border-gray-300 min-w-[600px]">
       <thead>
         <tr className="bg-gray-100">
           <th className="border p-2">Image</th>
@@ -224,7 +224,7 @@ function ProductTable({ products, handleDelete, handleEdit, section }) {
             <td className="border p-2">
               <button
                 onClick={() => handleDelete(product._id || product.id, section)}
-                className="bg-red-500 text-white p-1 rounded"
+                className="bg-red-500 text-white py-1 px-2 hover:bg-red-600 transition rounded"
               >
                 Delete
               </button>

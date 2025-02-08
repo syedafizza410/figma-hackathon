@@ -116,9 +116,9 @@ export default function AddProduct() {
 };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <AdminSidebar />
-      <div className="p-6 flex-grow">
+      <div className="p-6 flex-grow w-full">
         <h1 className="text-2xl font-bold mb-4">Add Product</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -127,7 +127,7 @@ export default function AddProduct() {
             placeholder="Product Title"
             value={product.title}
             onChange={(e) => setProduct({ ...product, title: e.target.value })}
-            className="border p-2"
+            className="border p-2 w-full"
             required
           />
 
@@ -136,7 +136,7 @@ export default function AddProduct() {
             placeholder="Price"
             value={product.price}
             onChange={(e) => setProduct({ ...product, price: e.target.value })}
-            className="border p-2"
+            className="border p-2 w-full"
             required
           />
 
@@ -144,7 +144,7 @@ export default function AddProduct() {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="border p-2"
+            className="border p-2 w-full"
             required
           />
           {uploading && <p className="text-blue-500">Uploading image...</p>}

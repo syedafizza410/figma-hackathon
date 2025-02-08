@@ -24,11 +24,11 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <AdminSidebar />
-      <div className="mt-52 p-6 flex-grow">
-        <h1 className="text-center text-5xl font-bold text-pink-500">Welcome to Admin Dashboard</h1>
-        <p className="text-center mt-2 font-semibold text-2xl text-purple-600">Hello😃 {session?.user?.email}</p>
+      <div className="mt-52 p-6 w-full text-center flex-grow">
+        <h1 className="text-3xl md:text-5xl font-bold text-pink-500">Welcome to Admin Dashboard</h1>
+        <p className="mt-2 font-semibold text-lg md:text-2xl text-purple-600">Hello😃 {session?.user?.email}</p>
         {/* <button
           onClick={() => signOut()}
           className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
