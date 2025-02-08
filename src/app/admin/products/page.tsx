@@ -147,6 +147,7 @@ export default function ManageProducts() {
 
 function ProductTable({ products, handleDelete, handleEdit, section }) {
   return (
+    <div className="overflow-x-auto">
     <table className="w-full border-collapse border border-gray-300 min-w-[600px]">
       <thead>
         <tr className="bg-gray-100">
@@ -233,5 +234,6 @@ function ProductTable({ products, handleDelete, handleEdit, section }) {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
