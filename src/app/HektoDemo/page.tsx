@@ -24,15 +24,7 @@ const CheckoutPage = () => {
 
   const calculateTotal = () =>
     cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-      if (storedCart.length > 0) {
-        storedCart.forEach((item) => updateQuantity(item.id, item.quantity));
-      }
-    }
-  }, [updateQuantity]);    
+   
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
