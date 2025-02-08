@@ -25,11 +25,6 @@ const CheckoutPage = () => {
   const calculateTotal = () =>
     cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormDetails({ ...formDetails, [name]: value });
-  };
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -37,7 +32,12 @@ const CheckoutPage = () => {
         storedCart.forEach((item) => updateQuantity(item.id, item.quantity));
       }
     }
-  }, [updateQuantity]);   
+  }, [updateQuantity]);    
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormDetails({ ...formDetails, [name]: value });
+  };   
 
   useEffect(() => {
     const { email, firstName, lastName, address, city, country, postalCode } = formDetails;
@@ -47,11 +47,6 @@ const CheckoutPage = () => {
   }, [formDetails]);
 
   const handleProceedToCheckout = () => {
-    if (cart.length === 0) {
-      alert("🚨 Please add a product before proceeding to payment!");
-      return;
-    }
-
     if (typeof window !== "undefined") {
       localStorage.setItem("formDetails", JSON.stringify(formDetails));
       localStorage.setItem("orderHistory", JSON.stringify(cart));
@@ -197,8 +192,7 @@ const CheckoutPage = () => {
             
         <div className="lg:mt-28 bg-white p-6 rounded-lg shadow-md">
           <ul className="divide-y divide-gray-200">
-            {cart.length > 0 ? (
-             cart.map((item) => (
+             {cart.map((item) => (
               <li key={item.id} className="flex items-center py-4">
                 <Image
                   src={item.image}
@@ -226,11 +220,7 @@ const CheckoutPage = () => {
                   Remove
                 </button>
               </li>
-            ))
-          ) : (
-            <p className="text-center text-gray-600 py-4">
-                🛒 Your cart is empty!
-              </p>
+             )
           )}
           </ul>
 
