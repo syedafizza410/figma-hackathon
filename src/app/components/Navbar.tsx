@@ -121,9 +121,9 @@ const Navbar = () => {
                     <Link href="/Shop" className="block px-4 py-2 text-white">
                       Shop Left SideBar
                     </Link>
-                    <Link href="/cart" className="block px-4 py-2 text-white">
+                    {/* <Link href="/cart" className="block px-4 py-2 text-white">
                       Cart
-                    </Link>
+                    </Link> */}
                     <Link href="/login" className="block px-4 py-2 text-white">
                       My Account
                     </Link>

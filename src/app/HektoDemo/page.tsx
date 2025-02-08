@@ -31,6 +31,15 @@ const CheckoutPage = () => {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      if (storedCart.length > 0) {
+        storedCart.forEach((item) => updateQuantity(item.id, item.quantity));
+      }
+    }
+  }, [updateQuantity]);   
+
+  useEffect(() => {
     const { email, firstName, lastName, address, city, country, postalCode } = formDetails;
     setIsFormValid(
       !!(email && firstName && lastName && address && city && country && postalCode)
