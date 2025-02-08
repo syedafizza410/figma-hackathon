@@ -60,7 +60,7 @@ const About = () => {
             history reflects years of dedication to our customers.
           </p>
           <button className="mt-6 bg-[#FB2E86] text-white px-6 py-3 rounded-md shadow-md hover:bg-[#FB2E86]">
-          <a href='/contact'>Contact Us</a> 
+          <a href='/Contact'>Contact Us</a> 
           </button>
         </div>
       </div>

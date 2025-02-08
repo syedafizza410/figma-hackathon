@@ -38,6 +38,11 @@ const CheckoutPage = () => {
   }, [formDetails]);
 
   const handleProceedToCheckout = () => {
+    if (cart.length === 0) {
+      alert("🚨 Please add a product before proceeding to payment!");
+      return;
+    }
+
     if (typeof window !== "undefined") {
       localStorage.setItem("formDetails", JSON.stringify(formDetails));
       localStorage.setItem("orderHistory", JSON.stringify(cart));
@@ -183,7 +188,8 @@ const CheckoutPage = () => {
             
         <div className="lg:mt-28 bg-white p-6 rounded-lg shadow-md">
           <ul className="divide-y divide-gray-200">
-            {cart.map((item) => (
+            {cart.length > 0 ? (
+             cart.map((item) => (
               <li key={item.id} className="flex items-center py-4">
                 <Image
                   src={item.image}
@@ -211,8 +217,14 @@ const CheckoutPage = () => {
                   Remove
                 </button>
               </li>
-            ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-600 py-4">
+                🛒 Your cart is empty!
+              </p>
+          )}
           </ul>
+
           <div className="mt-4">
             <p className="text-blue-900 font-semibold">Total: ${calculateTotal()}</p>
           </div>

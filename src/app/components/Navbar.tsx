@@ -209,7 +209,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link className="block py-2 text-white" href="/products">
-                  Product
+                  Products
                 </Link>
               </li>
               <li>
