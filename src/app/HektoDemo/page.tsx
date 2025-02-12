@@ -9,6 +9,21 @@ const CheckoutPage = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const router = useRouter();
 
+  const [checkoutCart, setCheckoutCart] = useState(cart);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCheckoutCart(JSON.parse(storedCart));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setCheckoutCart(cart);
+  }, [cart]);
+
   const [formDetails, setFormDetails] = useState({
     email: "",
     firstName: "",
@@ -23,7 +38,7 @@ const CheckoutPage = () => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const calculateTotal = () =>
-    cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    checkoutCart.reduce((total, item) => total + item.price * item.quantity, 0);
    
 
   const handleInputChange = (e) => {
