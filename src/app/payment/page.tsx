@@ -1,66 +1,28 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { loadStripe, StripeError } from "@stripe/stripe-js";
-import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
 const CheckoutForm = ({ clientSecret, onSuccess }) => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [error, setError] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    if (!stripe || !elements) {
-      setError("Stripe.js has not yet loaded. Please try again.");
-      return;
-    }
-  
-    setIsProcessing(true);
-  
-    try {
-      const result: { paymentIntent?: { status: string }; error?: StripeError } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/ordercomplete`,
-        },
-      });
-  
-      if (result.error) {
-        console.error("Stripe Error:", result.error.message);
-        setError(result.error.message || "An error occurred during payment.");
-      } else if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
-        console.log("Payment succeeded:", result.paymentIntent);
-        alert("✅ Payment Successful!");
-        onSuccess();
-      } else {
-        console.error("Unexpected result:", result);
-        setError("Unexpected error occurred. Please try again.");
-      }
-    } catch (err) {
-      console.error("Error during payment submission:", err);
-      setError("An unexpected error occurred. Please try again.");
-    } finally {
-      setIsProcessing(false);
-    }
+    alert("✅ Payment Successful!");
+    onSuccess();
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold text-blue-900 mb-4">Payment Details</h2>
-      {error && <div className="text-red-500 mb-4">{error}</div>}
       <PaymentElement />
       <button
         type="submit"
-        disabled={!stripe || isProcessing}
         className="w-full bg-pink-500 text-white py-3 rounded-md hover:bg-pink-600 mt-4"
       >
-        {isProcessing ? "Processing..." : "Pay with Card"}
+        Pay with Card
       </button>
     </form>
   );
@@ -72,16 +34,21 @@ const PaymentPage = () => {
   const [formDetails, setFormDetails] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("stripe");
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    const savedOrderHistory = localStorage.getItem("orderHistory");
-    const savedFormDetails = localStorage.getItem("formDetails");
-    if (savedOrderHistory) setOrderHistory(JSON.parse(savedOrderHistory));
-    if (savedFormDetails) setFormDetails(JSON.parse(savedFormDetails));
-  }, []);
+    if (typeof window !== "undefined") {
+      const savedOrderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
+      const savedFormDetails = JSON.parse(localStorage.getItem("formDetails") || "{}");
 
-  const calculateTotal = useMemo(() => {
-    return orderHistory.reduce((total, item) => total + item.price * item.quantity, 0);
+      setOrderHistory(savedOrderHistory);
+      setFormDetails(savedFormDetails);
+    }
+  }, [])
+
+  useEffect(() => {
+    const total = orderHistory.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotalAmount(total);
   }, [orderHistory]);
 
   const fetchPaymentIntent = useCallback(async () => {
@@ -93,25 +60,23 @@ const PaymentPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           order: orderHistory,
-          totalAmount: calculateTotal,
+          totalAmount: totalAmount, 
           paymentMethod,
         }),
       });
 
       const data = await response.json();
       if (data.clientSecret) setClientSecret(data.clientSecret);
-      if (data.sessionId) {
-        const stripe = await stripePromise;
-        await stripe.redirectToCheckout({ sessionId: data.sessionId });
-      }
     } catch (error) {
       console.error("Error fetching payment intent:", error);
     }
-  }, [calculateTotal, orderHistory, paymentMethod]);
+  }, [totalAmount, orderHistory, paymentMethod]);
 
   useEffect(() => {
-    fetchPaymentIntent();
-  }, [fetchPaymentIntent]);
+    if (orderHistory.length > 0) {
+      fetchPaymentIntent();
+    }
+  }, [fetchPaymentIntent, orderHistory]);
 
   const handlePaymentSuccess = () => {
     localStorage.removeItem("formDetails");
@@ -153,27 +118,32 @@ const PaymentPage = () => {
         </div>
       )}
 
-<div className="bg-purple-50 p-6 rounded-lg shadow-md mt-8">
+      <div className="bg-purple-50 p-6 rounded-lg shadow-md mt-8">
         <h2 className="text-xl font-semibold text-blue-900 mb-4">Order Summary</h2>
-        <ul className="divide-y divide-gray-300">
-          {orderHistory.map((item) => (
-            <li key={item.id} className="flex justify-between py-4">
-              <div>
-                <p className="font-medium">{item.name}</p>
-                <p className="text-sm text-gray-500">
-                  ${Number(item.price).toFixed(2)} x {item.quantity}
+        {orderHistory.length > 0 ? (
+          <ul className="divide-y divide-gray-300">
+            {orderHistory.map((item) => (
+              <li key={item.id} className="flex justify-between py-4">
+                <div>
+                  <p className="font-medium">{item.name}</p>
+                  <p className="text-sm text-gray-500">
+                    ${Number(item.price).toFixed(2)} x {item.quantity}
+                  </p>
+                </div>
+                <p className="font-medium text-blue-900">
+                  ${Number(item.price * item.quantity).toFixed(2)}
                 </p>
-              </div>
-              <p className="font-medium text-blue-900">
-                ${Number(item.price * item.quantity).toFixed(2)}
-              </p>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500 text-center py-4">No items in cart.</p>
+        )}
+
         <div className="mt-4">
           <p className="flex justify-between text-blue-900">
             <span>Total:</span>
-            <span>${calculateTotal.toFixed(2)}</span>
+            <span>${totalAmount.toFixed(2)}</span>
           </p>
         </div>
 

@@ -9,20 +9,32 @@ const CheckoutPage = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const router = useRouter();
 
-  const [checkoutCart, setCheckoutCart] = useState(cart);
+  const [checkoutCart, setCheckoutCart] = useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("cart") || "[]");
+    }
+    return [];
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedCart = localStorage.getItem("cart");
-      if (storedCart) {
-        setCheckoutCart(JSON.parse(storedCart));
-      }
+      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCheckoutCart(storedCart);
     }
   }, []);
 
   useEffect(() => {
-    setCheckoutCart(cart);
+    if (cart.length > 0) {
+      setCheckoutCart(cart);
+    }
   }, [cart]);
+
+  const handleRemoveFromCart = (itemId) => {
+    removeFromCart(itemId); 
+    const updatedCart = checkoutCart.filter((item) => item.id !== itemId); 
+    setCheckoutCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+  };
 
   const [formDetails, setFormDetails] = useState({
     email: "",
@@ -55,12 +67,13 @@ const CheckoutPage = () => {
 
   const handleProceedToCheckout = () => {
     if (typeof window !== "undefined") {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      localStorage.setItem("orderHistory", JSON.stringify(cart)); 
       localStorage.setItem("formDetails", JSON.stringify(formDetails));
-      localStorage.setItem("orderHistory", JSON.stringify(cart));
     }
     clearCart();
     router.push("/payment");
-  };
+  };  
 
   return (
     <div className="p-4 md:p-8">
@@ -198,8 +211,9 @@ const CheckoutPage = () => {
         </div>
             
         <div className="lg:mt-28 bg-white p-6 rounded-lg shadow-md">
+          {checkoutCart.length > 0 ? (
           <ul className="divide-y divide-gray-200">
-             {cart.map((item) => (
+             {checkoutCart.map((item) => (
               <li key={item.id} className="flex items-center py-4">
                 <Image
                   src={item.image}
@@ -221,7 +235,7 @@ const CheckoutPage = () => {
                   />
                 </div>
                 <button
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => handleRemoveFromCart(item.id)}
                   className="text-red-500 ml-4"
                 >
                   Remove
@@ -230,6 +244,9 @@ const CheckoutPage = () => {
              )
           )}
           </ul>
+          ) : (
+            <p className="text-gray-500 text-center py-4">No items in cart</p>
+          )}
 
           <div className="mt-4">
             <p className="text-blue-900 font-semibold">Total: ${calculateTotal()}</p>
